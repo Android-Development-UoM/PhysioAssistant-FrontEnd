@@ -88,3 +88,44 @@ It is good to ensure that these colors are used consistently throughout the app.
 
 ### Strings
 The text strings used in each activity are located in separate `.xml` files in the `values` folder. For example, the strings used in the `MainActivity` activity are located in the `strings_main.xml` file. Similarly, the strings used in the `CreateServiceActivity` activity are located in the `strings_create_service.xml` file.
+
+## Authentication
+
+Currently, our app does not have a backend to handle authentication. As a temporary solution, we have implemented a simple authentication mechanism in the LoginActivity that checks if the entered username matches one of the predefined roles - `admin`, `doctor`, or `patient`. If the entered username is one of these roles, the user is redirected to the corresponding activity. Otherwise, the authentication fails and an error message is displayed.
+
+### Login Back-End
+For the backend what I have in mind is: \
+We implement a login endpoint that will require a username and password to authenticate the user and return the user's role if the login is successful. If the login fails, the backend will return an error message. This will replace the current dummy authentication mechanism that accepts any username as the authentication token.
+
+On the front-end, we will make a call to the login endpoint and retrieve the response. We will then extract the user's role from the response. Based on the user's role, we will open the corresponding activity. If the login fails, we will display the error message returned by the backend by setting the errorMsg attribute to the error message and setting it to visible.
+
+Here is an example of how the front-end code might be look to handle the new login process:
+```java
+public void handleLogin(View view) {
+    String username = String.valueOf(usernameInput.getText());
+    String password = String.valueOf(passwordInput.getText());
+    Log.i("Login", "Username: " + username + " Password: " + password);
+
+    // Call login endpoint
+    LoginResponse response = api.login(username, password);
+
+    if (response.isSuccess()) {
+        String role = response.getRole();
+        Intent next_activity;
+
+        if (role.equalsIgnoreCase("admin")) {
+            // Start Admin Activity
+        }
+        else if (role.equalsIgnoreCase("patient")) {
+            // Start Patient Activity
+        }
+        else if (role.equalsIgnoreCase("doctor")) {
+            // Start Patient Activity
+        }
+    } 
+    // Failed Authentication
+    else { 
+        // Show error message
+    }
+}
+```
