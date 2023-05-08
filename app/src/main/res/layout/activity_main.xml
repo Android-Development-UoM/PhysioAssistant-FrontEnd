@@ -33,7 +33,7 @@
             android:id="@+id/login_header"
             android:layout_width="match_parent"
             android:layout_height="63dp"
-            android:text="Login"
+            android:text="@string/login_text"
             android:textAlignment="center"
             android:textColor="@color/secondary_light"
             android:textSize="27sp" />
@@ -44,7 +44,7 @@
             android:layout_height="66dp"
             android:backgroundTint="@color/secondary_light"
             android:onClick="handleClick"
-            android:text="@string/admin_btn_text"
+            android:text="@string/admin_header_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
 
@@ -54,7 +54,7 @@
             android:layout_height="70dp"
             android:backgroundTint="@color/secondary_light"
             android:onClick="handleClick"
-            android:text="@string/doctor_btn_text"
+            android:text="@string/doctor_header_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
 
@@ -64,7 +64,7 @@
             android:layout_height="70dp"
             android:backgroundTint="@color/secondary_light"
             android:onClick="handleClick"
-            android:text="@string/patient_btn_text"
+            android:text="@string/patient_header_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
     </LinearLayout>
