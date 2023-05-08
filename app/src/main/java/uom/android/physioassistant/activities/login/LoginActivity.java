@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.i("Login", "Username: " + username + " Password: " + password);
 
         // TO DO: Call login endpoint
-        String role = username;
+        String role = username; // Dummy auth
         Intent next_activity;
 
         if (role.equalsIgnoreCase("admin")) {
@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
             next_activity = new Intent(this, DoctorActivity.class);
             startActivity(next_activity);
         }
-        else {
+        else {  // Failed Authentication
             Log.w("Login", "Invalid Credentials");
             this.errorMsg.setVisibility(View.VISIBLE);
         }
