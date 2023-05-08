@@ -40,7 +40,7 @@ When we finish with changes on the code the team will evaluate it and merge the 
 
 ## Development Guide
 
-Please refer to [Development Guide](https://github.com/Android-Development-UoM/PhysioAssistant-FrontEnd/docs/development-guide.md) for instructions on how the PhysioAssistant application works and understand its file structure. This guide includes information on each activity in the app, as well as details about the resources used in the app such as the logo, colors, and strings.
+Please refer to [Development Guide](https://github.com/Android-Development-UoM/PhysioAssistant-FrontEnd/blob/main/docs/development-guide.md) for instructions on how the PhysioAssistant application works and understand its file structure. This guide includes information on each activity in the app, as well as details about the resources used in the app such as the logo, colors, and strings.
 
 ## Github Desktop Instructions
 
