@@ -38,6 +38,10 @@ We can make branches on own branches
 Once you have created your branch, you can make changes to the code and commit them to your branch.
 When we finish with changes on the code the team will evaluate it and merge the bracnhes on the master branch.
 
+## Development Guide
+
+Please refer to [Development Guide](https://github.com/Android-Development-UoM/PhysioAssistant-FrontEnd/docs/development-guide.md) for instructions on how the PhysioAssistant application works and understand its file structure. This guide includes information on each activity in the app, as well as details about the resources used in the app such as the logo, colors, and strings.
+
 ## Github Desktop Instructions
 
 Github Desktop is a tool that makes it easy to work with Github repositories on your local machine. Here are some basic instructions for using Github Desktop:

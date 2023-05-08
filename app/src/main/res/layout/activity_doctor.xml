@@ -5,68 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_dark"
-    tools:context=".MainActivity">
+    tools:context=".activities.doctor.DoctorActivity">
 
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="256dp"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088"
         app:srcCompat="@drawable/logo_white" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="354dp"
-        android:layout_height="346dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="362dp"
+        android:layout_height="414dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_img">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/login_header"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:text="@string/login_text"
+            android:layout_height="77dp"
+            android:text="@string/doctor_header_text"
             android:textAlignment="center"
             android:textColor="@color/secondary_light"
-            android:textSize="27sp" />
+            android:textSize="34sp" />
 
         <Button
-            android:id="@+id/admin_btn"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:onClick="handleClick"
-            android:text="@string/admin_header_text"
+            android:text="@string/view_patients_btn_text"
             android:textColor="@color/primary_dark"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/doctor_btn"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:onClick="handleClick"
-            android:text="@string/doctor_header_text"
+            android:text="@string/view_weekly_plan_btn_text"
             android:textColor="@color/primary_dark"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <Button
-            android:id="@+id/patient_btn"
+            android:id="@+id/button4"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:onClick="handleClick"
-            android:text="@string/patient_header_text"
+            android:text="@string/view_all_requests_btn_text"
             android:textColor="@color/primary_dark"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
