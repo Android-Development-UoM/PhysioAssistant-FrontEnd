@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_dark"
+    android:textAlignment="center"
     tools:context=".activities.login.LoginActivity">
 
     <ImageView
@@ -38,6 +39,15 @@
             android:textColor="@color/secondary_light"
             android:textSize="34sp" />
 
+        <TextView
+            android:id="@+id/error_msg"
+            android:layout_width="379dp"
+            android:layout_height="34dp"
+            android:text="Wrong username or password."
+            android:textAlignment="center"
+            android:textColor="@color/design_default_color_error"
+            android:visibility="invisible" />
+
         <EditText
             android:id="@+id/username_input"
             android:layout_width="match_parent"
@@ -70,6 +80,7 @@
             android:text="Login"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
