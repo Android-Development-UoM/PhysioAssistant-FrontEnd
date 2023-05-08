@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="admin_btn_text">ΠΣΦ</string>
+    <string name="doctor_btn_text">ΓΙΑΤΡΟΣ</string>
+    <string name="patient_btn_text">ΑΣΘΕΝΗΣ</string>
+</resources>
