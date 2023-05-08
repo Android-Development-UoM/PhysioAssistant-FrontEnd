@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:backgroundTint="@color/secondary_light"
+            android:onClick="handleClick"
             android:text="@string/admin_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
@@ -52,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:backgroundTint="@color/secondary_light"
+            android:onClick="handleClick"
             android:text="@string/doctor_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
@@ -61,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:backgroundTint="@color/secondary_light"
+            android:onClick="handleClick"
             android:text="@string/patient_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="24sp" />
