@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.models.Doctor;
 
 public class CreateServiceActivity extends AppCompatActivity {
     private EditText physioCenterNameInput;
@@ -41,14 +42,15 @@ public class CreateServiceActivity extends AppCompatActivity {
     // This method is called when the user clicks on the add button
     public void addBtnClicked(View view) {
         // Get the input text from the three EditText views
-        String serviceName = String.valueOf(this.physioCenterNameInput.getText());
+        String doctorName = String.valueOf(this.physioCenterNameInput.getText());
         String address = String.valueOf(this.addressInput.getText());
         String afm = String.valueOf(this.afmInput.getText());
 
-        // Concatenate the input text into a single string for logging purposes
-        String logText = "[Service Name: " + serviceName + " | Address: " + address + " | AFM: " + afm + "]";
+        // Create the Doctor object to send to the backend
+        Doctor new_doctor = new Doctor(doctorName, address, afm);
+
         // Log the input values to the console for debugging purposes
-        Log.i("CreateServiceActivity", "Added Service with values: " + logText);
+        Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
 
         // Create the Toast object with a message and duration
         Toast.makeText(getApplicationContext(), "This is a Toast message!", Toast.LENGTH_SHORT).show();
