@@ -5,4 +5,10 @@
 
     <color name="primary_dark">#131626</color>
     <color name="secondary_light">#FFFFFFFF</color>
+
+    <color name="button_idle">#A8AFAF</color>
+    <color name="button_pressed">#2B6FCA</color>
+    <color name="gray">#A59C9C</color>
+
+
 </resources>
