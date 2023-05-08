@@ -31,7 +31,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:text="ΓΙΑΤΡΟΣ"
+            android:text="@string/doctor_header_text"
             android:textAlignment="center"
             android:textColor="@color/secondary_light"
             android:textSize="34sp" />
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Ασθενεις"
+            android:text="@string/view_patients_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Εβδομαδιαιο Πλανο Ραντεβου"
+            android:text="@string/view_weekly_plan_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
 
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Αιτήματα"
+            android:text="@string/view_all_requests_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
     </LinearLayout>
