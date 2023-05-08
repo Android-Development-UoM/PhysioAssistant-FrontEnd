@@ -31,7 +31,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:text="ΠΣΦ"
+            android:text="@string/admin_header_text"
             android:textAlignment="center"
             android:textColor="@color/secondary_light"
             android:textSize="34sp" />
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Δημιουργια Φυσικοθεραπευτηριου"
+            android:text="@string/create_physio_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Προσθήκη Παροχής"
+            android:text="@string/add_service_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
     </LinearLayout>
