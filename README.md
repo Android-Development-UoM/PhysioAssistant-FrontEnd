@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Front--End-purple" alt="Front-End" />
 </p>
 
-This is a Github repository created to store our assignment for the Android Development course at University of Macdenia.
+This is a Github repository created to store our assignment for the Android Development course at University of Macedonia.
 
 ## Cloning the Repository
 
