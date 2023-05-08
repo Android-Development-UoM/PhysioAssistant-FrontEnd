@@ -46,7 +46,7 @@ public class CreateServiceActivity extends AppCompatActivity {
         String afm = String.valueOf(this.afmInput.getText());
 
         // Concatenate the input text into a single string for logging purposes
-        String logText = "Service Name: " + serviceName + " | Address: " + address + " | AFM: " + afm;
+        String logText = "[Service Name: " + serviceName + " | Address: " + address + " | AFM: " + afm + "]";
         // Log the input values to the console for debugging purposes
         Log.i("CreateServiceActivity", "Added Service with values: " + logText);
 
