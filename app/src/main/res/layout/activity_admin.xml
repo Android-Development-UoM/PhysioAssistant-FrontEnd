@@ -37,10 +37,11 @@
             android:textSize="34sp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/create_center_btn"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
+            android:onClick="createCenterBtnClicked"
             android:text="@string/create_physio_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
