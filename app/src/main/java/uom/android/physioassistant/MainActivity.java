@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import uom.android.physioassistant.activities.login.AdminLoginActivity;
+import uom.android.physioassistant.activities.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     private Button adminLoginBtn;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Button clickedButton = (Button) view;
         if (clickedButton == this.adminLoginBtn) {
             Log.i("Main", "Admin Login button clicked.");
-            Intent adminLoginIntent = new Intent(this, AdminLoginActivity.class);
+            Intent adminLoginIntent = new Intent(this, LoginActivity.class);
             startActivity(adminLoginIntent);
         }
         if (clickedButton == this.doctorLoginBtn) {

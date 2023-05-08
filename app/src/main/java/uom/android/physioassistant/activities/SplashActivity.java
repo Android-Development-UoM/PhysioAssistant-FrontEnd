@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import uom.android.physioassistant.MainActivity;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
