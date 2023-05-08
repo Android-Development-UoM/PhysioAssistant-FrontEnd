@@ -30,7 +30,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:text="ΑΣΘΕΝΗΣ"
+            android:text="@string/patient_header_text"
             android:textAlignment="center"
             android:textColor="@color/secondary_light"
             android:textSize="34sp" />
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Αιτημα Ραντεβου"
+            android:text="@string/appointment_request_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
 
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:backgroundTint="@color/secondary_light"
-            android:text="Κατασταση Οικονομικων Κινησεων"
+            android:text="@string/financial_details_btn_text"
             android:textColor="@color/primary_dark"
             android:textSize="20sp" />
     </LinearLayout>
