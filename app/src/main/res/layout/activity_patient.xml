@@ -13,7 +13,8 @@
         android:layout_height="match_parent"/>
 
 
-    <RelativeLayout
+    <uom.android.physioassistant.ui.NavBar
+        android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,21 +24,21 @@
         android:elevation="10dp"
         android:padding="10dp">
 
-        <ImageView
+        <uom.android.physioassistant.ui.HomeButton
             android:id="@+id/homeButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/ic_home"
             android:layout_marginLeft="30dp"/>
 
-        <ImageView
+        <uom.android.physioassistant.ui.CalendarButton
             android:id="@+id/calendarButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/ic_calendar"
             android:layout_centerHorizontal="true"/>
 
-        <ImageView
+        <uom.android.physioassistant.ui.ProfileButton
             android:id="@+id/profileButton"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -45,6 +46,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="30dp"/>
 
-    </RelativeLayout>
+    </uom.android.physioassistant.ui.NavBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
