@@ -9,15 +9,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.admin.AdminActivity;
-import uom.android.physioassistant.activities.doctor.DoctorActivity;
-import uom.android.physioassistant.activities.patient.PatientActivity;
+import uom.android.physioassistant.backend.api.AuthenticationApi;
+import uom.android.physioassistant.backend.requests.LoginRequest;
+import uom.android.physioassistant.backend.responses.LoginResponse;
+import uom.android.physioassistant.backend.retrofit.RetrofitService;
 
 public class LoginActivity extends AppCompatActivity {
     EditText usernameInput;
     EditText passwordInput;
     TextView errorMsg;
+    RetrofitService retrofitService;
+    AuthenticationApi authenticationApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         this.usernameInput = findViewById(R.id.username_input);
         this.passwordInput = findViewById(R.id.password_input);
         this.errorMsg = findViewById(R.id.error_msg);
+
+        this.retrofitService = new RetrofitService();
+        this.authenticationApi = retrofitService.getRetrofit().create(AuthenticationApi.class);
     }
 
     public void handleLogin(View view) {
@@ -34,29 +44,38 @@ public class LoginActivity extends AppCompatActivity {
         String password = String.valueOf(passwordInput.getText());
         Log.i("Login", "Username: " + username + " Password: " + password);
 
-        // TO DO: Call login endpoint
-        String role = username; // Dummy auth
-        Intent next_activity;
+        LoginRequest loginRequest = new LoginRequest(username, password);
 
-        if (role.equalsIgnoreCase("admin")) {
-            Log.i("Login", "Admin Login");
-            next_activity = new Intent(this, AdminActivity.class);
-            startActivity(next_activity);
-        }
-        else if (role.equalsIgnoreCase("patient")) {
-            next_activity = new Intent(this, PatientActivity.class);
-            startActivity(next_activity);
-            Log.i("Login", "Patient Login");
-        }
-        else if (role.equalsIgnoreCase("doctor")) {
-            Log.i("Login", "Doctor Login");
-            next_activity = new Intent(this, DoctorActivity.class);
-            startActivity(next_activity);
-        }
-        else {  // Failed Authentication
-            Log.w("Login", "Invalid Credentials");
-            this.errorMsg.setVisibility(View.VISIBLE);
-        }
+        // Attempt to login to the api
+        this.authenticationApi.login(loginRequest)
+                .enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        Log.i("Login", "Api call done.");
+
+                        LoginResponse loginResponse = response.body();
+
+                        // Check if login is successful
+                        if (response.isSuccessful()) {
+                            Log.i("Login", "Login Successful");
+
+                            // Check what is the user role and open corresponding activity
+                            String role = loginResponse.getUserRole();
+
+                            Intent next_activity = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(next_activity);
+                        }
+                        else {
+                            errorMsg.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Log.w("Login Error", "Api call failed");
+                        Log.e("Error", t.getMessage());
+                    }
+                });
 
     }
 }
