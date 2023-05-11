@@ -12,7 +12,7 @@ import android.widget.Toast;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.models.Doctor;
 
-public class CreateServiceActivity extends AppCompatActivity {
+public class CreateDoctorActivity extends AppCompatActivity {
     private EditText physioCenterNameInput;
     private EditText addressInput;
     private EditText afmInput;

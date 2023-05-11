@@ -22,7 +22,7 @@ public class AdminActivity extends AppCompatActivity {
 
     public void createCenterBtnClicked(View view) {
         Log.i("Admin", "Create Physiotherapy Center button clicked");
-        Intent nextActivity = new Intent(this, CreateServiceActivity.class);
+        Intent nextActivity = new Intent(this, CreateDoctorActivity.class);
         startActivity(nextActivity);
     }
 }

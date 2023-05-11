@@ -17,7 +17,7 @@
         android:theme="@style/Theme.PhysioAssistant"
         tools:targetApi="31">
         <activity
-            android:name=".activities.admin.CreateServiceActivity"
+            android:name=".activities.admin.CreateDoctorActivity"
             android:exported="false" />
         <activity
             android:name=".activities.doctor.DoctorActivity"
