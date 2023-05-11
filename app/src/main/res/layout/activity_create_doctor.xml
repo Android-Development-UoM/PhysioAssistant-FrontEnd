@@ -37,8 +37,19 @@
             android:textColor="@color/secondary_light"
             android:textSize="24sp" />
 
+        <TextView
+            android:id="@+id/create_doctor_error_msg"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:paddingTop="5dp"
+            android:text="@string/default_error_text"
+            android:textAlignment="center"
+            android:textColor="@color/error_red"
+            android:visibility="invisible"
+            />
+
         <EditText
-            android:id="@+id/service_name_input"
+            android:id="@+id/doctor_name_input"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginBottom="10dp"
