@@ -82,38 +82,6 @@ public class CreateDoctorActivity extends AppCompatActivity {
 
     }
 
-    private void backupMethodToDelete() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Please provide User password");
-
-        // Set up the input
-        final EditText input = new EditText(this);
-        // Set the input type (optional)
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Get the user input here
-                String userInput = input.getText().toString();
-                // Do something with the input
-                // ...
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        // Create and show the dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void callTheApiToAddDoctor(Doctor doctor) {
         this.doctorApi.createDoctor(doctor)
                 .enqueue(new Callback<Doctor>() {
