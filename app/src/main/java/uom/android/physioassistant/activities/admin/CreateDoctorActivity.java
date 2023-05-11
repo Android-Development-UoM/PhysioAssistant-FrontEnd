@@ -10,8 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.backend.api.DoctorApi;
+import uom.android.physioassistant.backend.retrofit.RetrofitService;
 import uom.android.physioassistant.models.Doctor;
 
 public class CreateDoctorActivity extends AppCompatActivity {
@@ -19,6 +25,8 @@ public class CreateDoctorActivity extends AppCompatActivity {
     private EditText addressInput;
     private EditText afmInput;
     private EditText passwordInput;
+    private RetrofitService retrofitService;
+    private DoctorApi doctorApi;
     private Button cancelBtn;
     private Button addBtn;
 
@@ -36,6 +44,9 @@ public class CreateDoctorActivity extends AppCompatActivity {
         this.cancelBtn = findViewById(R.id.cancel_btn);
         this.addBtn = findViewById(R.id.add_service_btn);
         this.passwordInput = findViewById(R.id.doctor_pass_input);
+
+        this.retrofitService = new RetrofitService();
+        this.doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -57,7 +68,25 @@ public class CreateDoctorActivity extends AppCompatActivity {
         // Log the input values to the console for debugging purposes
         Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
 
+        this.doctorApi.createDoctor(new_doctor)
+                .enqueue(new Callback<Doctor>() {
+                    @Override
+                    public void onResponse(Call<Doctor> call, Response<Doctor> response) {
+                        Doctor addedDoctor = response.body();
 
+                        if (response.isSuccessful()) {
+                            Log.i("Create Doctor", "Doctor added");
+
+                            Toast.makeText(getApplicationContext(), "Doctor added!", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Doctor> call, Throwable t) {
+
+                    }
+                });
     }
 
     private void backupMethodToDelete() {
