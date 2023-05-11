@@ -18,6 +18,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
     private EditText physioCenterNameInput;
     private EditText addressInput;
     private EditText afmInput;
+    private EditText passwordInput;
     private Button cancelBtn;
     private Button addBtn;
 
@@ -34,6 +35,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
         this.afmInput = findViewById(R.id.afm_input);
         this.cancelBtn = findViewById(R.id.cancel_btn);
         this.addBtn = findViewById(R.id.add_service_btn);
+        this.passwordInput = findViewById(R.id.doctor_pass_input);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -47,9 +49,10 @@ public class CreateDoctorActivity extends AppCompatActivity {
         String doctorName = String.valueOf(this.physioCenterNameInput.getText());
         String address = String.valueOf(this.addressInput.getText());
         String afm = String.valueOf(this.afmInput.getText());
+        String password = String.valueOf(this.passwordInput.getText());
 
         // Create the Doctor object to send to the backend
-        Doctor new_doctor = new Doctor(doctorName, address, afm);
+        Doctor new_doctor = new Doctor(doctorName, address, afm, password);
 
         // Log the input values to the console for debugging purposes
         Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
