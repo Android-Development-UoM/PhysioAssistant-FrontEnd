@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_text">Login</string>
+    <string name="login_as_text">Σύνδεση ώς:</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+
+    <string-array name="user_types">
+        <item>--Επιλέξτε τύπο Χρήστη--</item>
+        <item>ΠΣΦ</item>
+        <item>ΓΙΑΤΡΟΣ</item>
+        <item>ΑΣΘΕΝΗΣ</item>
+    </string-array>
+</resources>
