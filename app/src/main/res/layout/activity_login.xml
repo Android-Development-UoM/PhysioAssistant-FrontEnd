@@ -45,6 +45,7 @@
             android:layout_height="32dp"
             android:alpha="0.7"
             android:paddingTop="5dp"
+            android:text="@string/default_error_text"
             android:textAlignment="center"
             android:textColor="@color/error_red"
             android:visibility="invisible" />
