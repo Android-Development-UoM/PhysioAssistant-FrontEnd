@@ -43,7 +43,6 @@
             android:id="@+id/error_msg"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:alpha="0.7"
             android:paddingTop="5dp"
             android:text="@string/default_error_text"
             android:textAlignment="center"
