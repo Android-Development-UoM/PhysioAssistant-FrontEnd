@@ -4,4 +4,5 @@
     <string name="service_name_hint">Όνομα</string>
     <string name="address_hint">Διεύθυνση</string>
     <string name="afm_hint">ΑΦΜ</string>
+    <string name="repeat_password_hint">Password</string>
 </resources>

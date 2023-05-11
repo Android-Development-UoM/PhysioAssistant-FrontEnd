@@ -2,12 +2,14 @@ package uom.android.physioassistant.activities.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.models.Doctor;
@@ -24,7 +26,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Set the activity layout using the corresponding XML file
-        setContentView(R.layout.activity_create_service);
+        setContentView(R.layout.activity_create_doctor);
 
         // Initialize the EditText and Button views
         this.physioCenterNameInput = findViewById(R.id.service_name_input);
@@ -52,7 +54,38 @@ public class CreateDoctorActivity extends AppCompatActivity {
         // Log the input values to the console for debugging purposes
         Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
 
-        // Create the Toast object with a message and duration
-        Toast.makeText(getApplicationContext(), "This is a Toast message!", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void backupMethodToDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please provide User password");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Set the input type (optional)
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Get the user input here
+                String userInput = input.getText().toString();
+                // Do something with the input
+                // ...
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
