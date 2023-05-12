@@ -37,11 +37,16 @@ public class CreateDoctorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Set the activity layout using the corresponding XML file
         setContentView(R.layout.activity_create_doctor);
+        init();
 
-        // Initialize the EditText and Button views
+        this.retrofitService = new RetrofitService();
+        this.doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
+    }
+
+    // Initialize ui components
+    private void init() {
         this.physioCenterNameInput = findViewById(R.id.doctor_name_input);
         this.addressInput = findViewById(R.id.address_input);
         this.afmInput = findViewById(R.id.afm_input);
@@ -49,9 +54,6 @@ public class CreateDoctorActivity extends AppCompatActivity {
         this.addBtn = findViewById(R.id.add_service_btn);
         this.passwordInput = findViewById(R.id.doctor_pass_input);
         this.errorMsg = findViewById(R.id.create_doctor_error_msg);
-
-        this.retrofitService = new RetrofitService();
-        this.doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -105,7 +107,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Doctor> call, Throwable t) {
-                        // Do nothing
+                        showErrorMessage("Σφάλμα Σύνδεσης. Προσπαθήστε ξανά αργότερα.");
                     }
                 });
     }
