@@ -3,6 +3,8 @@ package uom.android.physioassistant.activities.admin;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -56,7 +58,17 @@ public class CreateDoctorActivity extends AppCompatActivity {
 
     // This method is called when the user clicks on the cancel button
     public void cancelBtnClicked(View view) {
-        finish();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Επιβεβαίωση Ακύρωσης")
+                .setMessage("Τα δεδομένα δεν αποθηκεύτηκαν. Είστε σίγουροι ότι θέλετε να ακυρώσετε;")
+                .setPositiveButton("ΝΑΙ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("ΟΧΙ", null)
+                .show();
     }
 
     // This method is called when the user clicks on the add button
