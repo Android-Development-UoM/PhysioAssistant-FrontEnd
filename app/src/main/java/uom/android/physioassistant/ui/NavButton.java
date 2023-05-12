@@ -7,30 +7,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public abstract class NavButton extends androidx.appcompat.widget.AppCompatImageView {
+public class NavButton extends androidx.appcompat.widget.AppCompatImageView {
 
-    protected Fragment fragment;
+    private ButtonType buttonType;
     public NavButton(@NonNull Context context) {
         super(context);
-        init();
     }
 
     public NavButton(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public NavButton(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    public abstract void init();
 
-    public abstract void setPressed();
-    public abstract void setIdle();
+    public void setPressed(){
+        this.setImageResource(buttonType.getPressed());
+    }
+    public void setIdle(){
+        this.setImageResource(buttonType.getIdle());
+    }
 
-    public Fragment getFragment() {
-        return fragment;
+    public ButtonType getButtonType() {
+        return buttonType;
+    }
+
+    public void setButtonType(ButtonType buttonType) {
+        this.buttonType = buttonType;
     }
 }

@@ -1,12 +1,22 @@
 package uom.android.physioassistant.activities.patient;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
 
@@ -25,6 +35,12 @@ public class CalendarFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView appointmentRecyclerView;
+    private ArrayList<String> currentAppointments;
+    private ArrayList<String> historyAppointments;
+    private TextView historyButton,currentButton;
+    private TextView underlineCurrent,underlineHistory;
+    private RelativeLayout currentLayout,historyLayout;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -61,6 +77,70 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendar, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_calendar,container,false);
+        appointmentRecyclerView = view.findViewById(R.id.appointmentRecyclerView);
+        appointmentRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
+
+        historyAppointments = new ArrayList<>();
+        historyAppointments.add("Αθλητική Μάλαξη 1");
+        historyAppointments.add("Αθλητική Μάλαξη 2");
+        historyAppointments.add("Αθλητική Μάλαξη 3");
+        historyAppointments.add("Αθλητική Μάλαξη 4");
+        historyAppointments.add("Αθλητική Μάλαξη 5");
+        historyAppointments.add("Αθλητική Μάλαξη 6");
+
+        currentAppointments = new ArrayList<>();
+        currentAppointments.add("Αθλητική Μάλαξη 7");
+        currentAppointments.add("Αθλητική Μάλαξη 8");
+        currentAppointments.add("Αθλητική Μάλαξη 9");
+        currentAppointments.add("Αθλητική Μάλαξη 10");
+
+        AppointmentAdapter appointmentAdapter = new AppointmentAdapter(view.getContext());
+        appointmentAdapter.setAppointments(currentAppointments);
+        appointmentRecyclerView.setAdapter(appointmentAdapter);
+
+        currentButton = view.findViewById(R.id.currentButton);
+        historyButton = view.findViewById(R.id.historyButton);
+
+
+        underlineCurrent = view.findViewById(R.id.underlineCurrent);
+        underlineHistory = view.findViewById(R.id.underlineHistory);
+
+        currentLayout = view.findViewById(R.id.currentLayout);
+        historyLayout = view.findViewById(R.id.historyLayout);
+
+        currentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentButton.setTextColor(Color.BLACK);
+                underlineCurrent.setBackgroundColor(Color.BLACK);
+
+                historyButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+                underlineHistory.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+
+                appointmentAdapter.setAppointments(currentAppointments);
+                appointmentAdapter.notifyDataSetChanged();
+                underlineCurrent.setTextColor(Color.BLUE);
+            }
+        });
+
+        historyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                historyButton.setTextColor(Color.BLACK);
+                underlineHistory.setBackgroundColor(Color.BLACK);
+
+                currentButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+                underlineCurrent.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+
+                appointmentAdapter.setAppointments(historyAppointments);
+                appointmentAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+        return view;
+
     }
 }

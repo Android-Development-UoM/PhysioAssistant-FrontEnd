@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.patient.PatientActivity;
+import uom.android.physioassistant.activities.patient.PatientNavBar;
 
-public class NavBar extends RelativeLayout {
+public abstract class NavBar extends RelativeLayout {
 
-    private Activity activity;
+    protected Activity activity;
     public NavBar(Context context) {
         super(context);
     }
@@ -26,23 +27,10 @@ public class NavBar extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    private ArrayList<NavButton> buttons;
-    private NavButton currentButton;
+    protected ArrayList<NavButton> buttons;
+    protected NavButton currentButton;
 
-    private void init(){
-
-        HomeButton homeButton = activity.findViewById(R.id.homeButton);
-        CalendarButton calendarButton = activity.findViewById(R.id.calendarButton);
-        ProfileButton profileButton = activity.findViewById(R.id.profileButton);
-
-        currentButton = homeButton;
-
-        buttons = new ArrayList<>();
-        buttons.add(homeButton);
-        buttons.add(calendarButton);
-        buttons.add(profileButton);
-
-    }
+    protected abstract void init();
 
     public void handleClicks(){
         System.out.println(buttons.size());
@@ -60,6 +48,7 @@ public class NavBar extends RelativeLayout {
     public void setActivity(Activity activity) {
         this.activity = activity;
         init();
+
     }
 
     public void transition(NavButton nextButton){
@@ -69,7 +58,7 @@ public class NavBar extends RelativeLayout {
 
         float offset = nextButton.getX()-currentButton.getX();
 
-        ((PatientActivity)activity).replaceFragment(nextButton.getFragment());
+        ((PatientActivity)activity).replaceFragment(nextButton.getButtonType().getFragment());
         currentButton = nextButton;
 
     }

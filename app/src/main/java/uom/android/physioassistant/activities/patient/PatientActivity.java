@@ -4,18 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.ui.HomeButton;
-import uom.android.physioassistant.ui.NavBar;
 
 public class PatientActivity extends AppCompatActivity {
 
 
-    private NavBar navBar;
+    private PatientNavBar navBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
