@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
+
             }
         });
     }
@@ -185,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
                 Log.w("Login Error", "Api call failed");
                 // Log the error message
                 Log.e("Error", t.getMessage());
+                showErrorMessage("Σφάλμα Σύνδεσης. Προσπαθήστε ξανά αργότερα.");
             }
         });
     }
