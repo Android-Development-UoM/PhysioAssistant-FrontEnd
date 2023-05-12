@@ -4,4 +4,6 @@
     <string name="cancel_text">Ακυρωση</string>
     <string name="add_text">Προσθηκη</string>
     <string name="default_error_text">Ούπς! Υπήρξε κάποιο Σφάλμα.</string>
+
+    <string name="account_details_text">Στοιχεία Λογαριασμού:</string>
 </resources>
