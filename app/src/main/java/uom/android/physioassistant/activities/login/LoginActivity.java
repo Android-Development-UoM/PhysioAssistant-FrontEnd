@@ -127,23 +127,19 @@ public class LoginActivity extends AppCompatActivity {
 
     // Method to call the appropriate login API method based on the selected user type
     private void loginBasedOnSelectedUser(LoginRequest loginRequest) {
-        String admin = UserType.ADMIN.toString();
-        String doctor = UserType.DOCTOR.toString();
-        String patient = UserType.PATIENT.toString();
-
         // Check which user type was selected and call the corresponding loginUser method
-        if (selectedUserIs(admin))
+        if (selectedUserIs(UserType.ADMIN))
             loginUser(AdminActivity.class, this.authenticationApi.adminLogin(loginRequest));
 
-        else if (selectedUserIs(patient))
+        else if (selectedUserIs(UserType.PATIENT))
             loginUser(PatientActivity.class, this.authenticationApi.patientLogin(loginRequest));
 
-        else if (selectedUserIs(doctor))
+        else if (selectedUserIs(UserType.DOCTOR))
             loginUser(DoctorActivity.class, this.authenticationApi.doctorLogin(loginRequest));
     }
 
-    private boolean selectedUserIs(String role) {
-        return this.selectedUser.equalsIgnoreCase(role);
+    private boolean selectedUserIs(UserType userType) {
+        return this.selectedUser.equalsIgnoreCase(userType.toString());
     }
 
     // Helper method to make sure the credential input fields are not empty
