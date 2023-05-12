@@ -1,11 +1,9 @@
 package uom.android.physioassistant.activities.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -53,7 +51,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
         this.cancelBtn = findViewById(R.id.cancel_btn);
         this.addBtn = findViewById(R.id.add_service_btn);
         this.passwordInput = findViewById(R.id.doctor_pass_input);
-        this.errorMsg = findViewById(R.id.create_doctor_error_msg);
+        this.errorMsg = findViewById(R.id.create_doctor_msg);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -79,7 +77,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
             Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
         }
         else {
-            showErrorMessage("Ελλειπή Στοιχεία Γιατρού");
+            showMessage("Ελλειπή Στοιχεία Γιατρού", R.color.error_red);
         }
 
     }
@@ -94,27 +92,32 @@ public class CreateDoctorActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Log.i("Create Doctor", "Doctor added");
 
-                            Toast.makeText(getApplicationContext(), "Doctor added!", Toast.LENGTH_LONG)
+                            showMessage("Το Φυσικοθεραπευτήριο αποθηκεύτηκε!", R.color.success_green);
+                            Toast.makeText(getApplicationContext(), "Το Φυσικοθεραπευτήριο αποθηκεύτηκε!", Toast.LENGTH_SHORT)
                                     .show();
                         }
                         else if (response.code() == 406 ){
-                            showErrorMessage("Το Φυσικοθεραπευτήριο με ΑΦΜ: " + doctor.getAfm() + " υπάρχει ήδη.");
+                            showMessage("Το Φυσικοθεραπευτήριο με ΑΦΜ: " + doctor.getAfm() + " υπάρχει ήδη.", R.color.error_red);
                         }
                         else {
-                            showErrorMessage("Το Φυσικοθεραπευτήριο δεν αποθηκεύτηκε.");
+                            showMessage("Το Φυσικοθεραπευτήριο δεν αποθηκεύτηκε.", R.color.error_red);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Doctor> call, Throwable t) {
-                        showErrorMessage("Σφάλμα Σύνδεσης. Προσπαθήστε ξανά αργότερα.");
+                        showMessage("Σφάλμα Σύνδεσης. Προσπαθήστε ξανά αργότερα.", R.color.error_red);
                     }
                 });
     }
 
-    private void showErrorMessage(String message) {
+    private void showMessage(String message, int color) {
         errorMsg.setText(message);
         errorMsg.setVisibility(View.VISIBLE);
+
+        int textColor = ContextCompat.getColor(this, color);
+        errorMsg.setTextColor(textColor);
+
         errorMsg.postDelayed(() -> errorMsg.setVisibility(View.INVISIBLE), 3000); // 3 seconds delay
     }
 

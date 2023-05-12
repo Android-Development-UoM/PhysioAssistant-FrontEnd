@@ -40,9 +40,9 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/create_doctor_error_msg"
+                android:id="@+id/create_doctor_msg"
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="48dp"
                 android:paddingTop="5dp"
                 android:text="@string/default_error_text"
                 android:textAlignment="center"
