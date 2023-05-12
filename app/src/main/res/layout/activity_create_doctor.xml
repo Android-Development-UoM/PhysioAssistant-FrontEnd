@@ -7,122 +7,149 @@
     android:background="@color/primary_dark"
     tools:context=".activities.admin.CreateDoctorActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="168dp"
-        android:layout_height="132dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066"
-        app:srcCompat="@drawable/logo_white" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="382dp"
-        android:layout_height="479dp"
-        android:orientation="vertical"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/add_service_header"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:text="@string/add_service_header_text"
-            android:textAlignment="center"
-            android:textColor="@color/secondary_light"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/create_doctor_error_msg"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:paddingTop="5dp"
-            android:text="@string/default_error_text"
-            android:textAlignment="center"
-            android:textColor="@color/error_red"
-            android:visibility="invisible"
-            />
-
-        <EditText
-            android:id="@+id/doctor_name_input"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/secondary_light"
-            android:ems="10"
-            android:hint="@string/service_name_hint"
-            android:inputType="text"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/address_input"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/secondary_light"
-            android:ems="10"
-            android:hint="@string/address_hint"
-            android:inputType="text"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/afm_input"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/secondary_light"
-            android:ems="10"
-            android:hint="@string/afm_hint"
-            android:inputType="text"
-            android:padding="5dp" />
-
-        <EditText
-            android:id="@+id/doctor_pass_input"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/secondary_light"
-            android:ems="10"
-            android:hint="@string/password_hint"
-            android:inputType="text"
-            android:padding="5dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <Button
-                android:id="@+id/cancel_btn"
-                android:layout_width="189dp"
-                android:layout_height="63dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="2.5dp"
-                android:backgroundTint="@color/design_default_color_error"
-                android:onClick="cancelBtnClicked"
-                android:text="@string/cancel_text"
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="163dp"
+                app:srcCompat="@drawable/logo_white" />
+
+            <TextView
+                android:id="@+id/add_service_header"
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/add_service_header_text"
+                android:textAlignment="center"
                 android:textColor="@color/secondary_light"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
-            <Button
-                android:id="@+id/add_service_btn"
-                android:layout_width="189dp"
-                android:layout_height="63dp"
-                android:layout_marginLeft="2.5dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/secondary_light"
-                android:onClick="addBtnClicked"
-                android:text="@string/add_text"
-                android:textColor="@color/primary_dark"
-                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/create_doctor_error_msg"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:paddingTop="5dp"
+                android:text="@string/default_error_text"
+                android:textAlignment="center"
+                android:textColor="@color/error_red"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/doctor_details_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/doctor_details_text"
+                android:textColor="@color/secondary_light" />
+
+            <EditText
+                android:id="@+id/doctor_name_input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/secondary_light"
+                android:ems="10"
+                android:hint="@string/service_name_hint"
+                android:inputType="text"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/address_input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/secondary_light"
+                android:ems="10"
+                android:hint="@string/address_hint"
+                android:inputType="text"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/afm_input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/secondary_light"
+                android:ems="10"
+                android:hint="@string/afm_hint"
+                android:inputType="text"
+                android:padding="5dp" />
+
+            <TextView
+                android:id="@+id/doctor_account_details_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/account_details_text"
+                android:textColor="@color/secondary_light" />
+
+            <EditText
+                android:id="@+id/doctor_username_input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/secondary_light"
+                android:ems="10"
+                android:hint="@string/username_hint"
+                android:inputType="text"
+                android:padding="5dp" />
+
+            <EditText
+                android:id="@+id/doctor_pass_input"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/secondary_light"
+                android:ems="10"
+                android:hint="@string/password_hint"
+                android:inputType="text"
+                android:padding="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="103dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="189dp"
+                    android:layout_height="63dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="2.5dp"
+                    android:backgroundTint="@color/design_default_color_error"
+                    android:onClick="cancelBtnClicked"
+                    android:text="@string/cancel_text"
+                    android:textColor="@color/secondary_light"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/add_service_btn"
+                    android:layout_width="189dp"
+                    android:layout_height="63dp"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/secondary_light"
+                    android:onClick="addBtnClicked"
+                    android:text="@string/add_text"
+                    android:textColor="@color/primary_dark"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
