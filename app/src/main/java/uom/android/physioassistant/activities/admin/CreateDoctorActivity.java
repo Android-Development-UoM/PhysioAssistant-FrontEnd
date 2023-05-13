@@ -27,6 +27,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
     private EditText addressInput;
     private EditText nameInput;
     private EditText afmInput;
+    private EditText usernameInput;
     private EditText passwordInput;
     private TextView errorMsg;
     private RetrofitService retrofitService;
@@ -54,6 +55,8 @@ public class CreateDoctorActivity extends AppCompatActivity {
         this.addBtn = findViewById(R.id.add_service_btn);
         this.passwordInput = findViewById(R.id.doctor_pass_input);
         this.errorMsg = findViewById(R.id.create_doctor_msg);
+        this.usernameInput = findViewById(R.id.doctor_username_input);
+        this.nameInput = findViewById(R.id.doctor_name_input);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -79,10 +82,11 @@ public class CreateDoctorActivity extends AppCompatActivity {
         String doctorName = String.valueOf(this.physioCenterNameInput.getText());
         String address = String.valueOf(this.addressInput.getText());
         String afm = String.valueOf(this.afmInput.getText());
+        String username = String.valueOf(this.usernameInput.getText());
         String password = String.valueOf(this.passwordInput.getText());
 
         // Create the Doctor object to send to the backend
-        Doctor new_doctor = new Doctor(doctorName, address, afm, password);
+        Doctor new_doctor = new Doctor(doctorName, address, afm, username, password);
 
         if (detailsAreProvided(doctorName, address, afm, password)) {
             callTheApiToAddDoctor(new_doctor);
@@ -108,8 +112,8 @@ public class CreateDoctorActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Το Φυσικοθεραπευτήριο αποθηκεύτηκε!", Toast.LENGTH_SHORT)
                                     .show();
                         }
-                        else if (response.code() == 406 ){
-                            showMessage("Το Φυσικοθεραπευτήριο με ΑΦΜ: " + doctor.getAfm() + " υπάρχει ήδη.", R.color.error_red);
+                        else if (response.code() == 409 ){
+                            showMessage("Το Φυσικοθεραπευτήριο με Username: " + doctor.getAfm() + " υπάρχει ήδη.", R.color.error_red);
                         }
                         else {
                             showMessage("Το Φυσικοθεραπευτήριο δεν αποθηκεύτηκε.", R.color.error_red);

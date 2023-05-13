@@ -5,8 +5,8 @@ public class Doctor extends User {
     private String name;
     private String address;
 
-    public Doctor(String name, String address, String afm, String password) {
-        super(password);
+    public Doctor(String name, String address, String afm, String username, String password) {
+        super(username, password);
         this.afm = afm;
         this.name = name;
         this.address = address;

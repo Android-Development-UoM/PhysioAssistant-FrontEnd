@@ -29,5 +29,13 @@ public class LoginResponse {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "user=" + user +
+                ", errorMessage='" + errorMessage + '\'' +
+                '}';
+    }
 }
 
