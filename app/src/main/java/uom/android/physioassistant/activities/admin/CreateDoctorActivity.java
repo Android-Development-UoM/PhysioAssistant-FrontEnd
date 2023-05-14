@@ -25,7 +25,6 @@ import uom.android.physioassistant.models.Doctor;
 public class CreateDoctorActivity extends AppCompatActivity {
     private EditText physioCenterNameInput;
     private EditText addressInput;
-    private EditText nameInput;
     private EditText afmInput;
     private EditText usernameInput;
     private EditText passwordInput;
@@ -48,15 +47,16 @@ public class CreateDoctorActivity extends AppCompatActivity {
 
     // Initialize ui components
     private void init() {
+        this.errorMsg = findViewById(R.id.create_doctor_msg);
+
         this.physioCenterNameInput = findViewById(R.id.doctor_name_input);
         this.addressInput = findViewById(R.id.address_input);
         this.afmInput = findViewById(R.id.afm_input);
+        this.usernameInput = findViewById(R.id.doctor_username_input);
+        this.passwordInput = findViewById(R.id.doctor_pass_input);
+
         this.cancelBtn = findViewById(R.id.cancel_btn);
         this.addBtn = findViewById(R.id.add_service_btn);
-        this.passwordInput = findViewById(R.id.doctor_pass_input);
-        this.errorMsg = findViewById(R.id.create_doctor_msg);
-        this.usernameInput = findViewById(R.id.doctor_username_input);
-        this.nameInput = findViewById(R.id.doctor_name_input);
     }
 
     // This method is called when the user clicks on the cancel button
@@ -88,7 +88,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
         // Create the Doctor object to send to the backend
         Doctor new_doctor = new Doctor(doctorName, address, afm, username, password);
 
-        if (detailsAreProvided(doctorName, address, afm, password)) {
+        if (detailsAreProvided(doctorName, address, afm, username, password)) {
             callTheApiToAddDoctor(new_doctor);
             Log.i("CreateServiceActivity", "Added Doctor: " + new_doctor);
         }
@@ -137,10 +137,11 @@ public class CreateDoctorActivity extends AppCompatActivity {
         errorMsg.postDelayed(() -> errorMsg.setVisibility(View.INVISIBLE), 3000); // 3 seconds delay
     }
 
-    private boolean detailsAreProvided(String name, String address, String afm, String password) {
+    private boolean detailsAreProvided(String name, String address, String afm, String username, String password) {
         return !TextUtils.isEmpty(name) &&
                 !TextUtils.isEmpty(address) &&
                 !TextUtils.isEmpty(afm) &&
+                !TextUtils.isEmpty(username) &&
                 !TextUtils.isEmpty(password);
     }
 }
