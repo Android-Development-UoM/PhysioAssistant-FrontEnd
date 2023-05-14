@@ -4,4 +4,15 @@
     <string name="login_text">Login</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_text">Πως αισθάνεσε σήμερα;</string>
+    <string name="date_text">Δευτέρα, 8 Μαίου</string>
+    <string name="upcoming_appointment">Επερχόμενο ραντεβού</string>
+    <string name="service_name">Αθλητική Μάλαξη</string>
+    <string name="service_date_text">10/5 12:00</string>
+    <string name="address_text">Θεσσαλονίκη, 3</string>
+    <string name="remaining_days_text">Απομένουν 4 ημέρες</string>
+    <string name="service_text">Υπηρεσίες</string>
+    <string name="show_all_text">Προβολή όλων</string>
 </resources>
