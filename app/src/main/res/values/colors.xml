@@ -10,5 +10,6 @@
     <color name="button_pressed">#213BC4</color>
     <color name="gray">#A59C9C</color>
 
-
+    <color name="error_red">#DC3545</color>
+    <color name="success_green">#28a745</color>
 </resources>
