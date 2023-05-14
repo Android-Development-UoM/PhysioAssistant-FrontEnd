@@ -3,6 +3,7 @@ package uom.android.physioassistant.activities.patient;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -141,6 +142,6 @@ public class CalendarFragment extends Fragment {
         });
 
         return view;
-
     }
+
 }

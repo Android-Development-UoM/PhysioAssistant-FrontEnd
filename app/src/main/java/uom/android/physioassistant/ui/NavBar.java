@@ -55,10 +55,17 @@ public abstract class NavBar extends RelativeLayout {
 
         resetButtons();
         nextButton.setPressed();
+        int enterAnimation,exitAnimation;
 
         float offset = nextButton.getX()-currentButton.getX();
+        enterAnimation = R.anim.enter_left_to_right;
+        exitAnimation = R.anim.exit_left_to_right;
+        if(offset>0){
+            enterAnimation = R.anim.enter_right_to_left;
+            exitAnimation = R.anim.exit_right_to_left;
+        }
 
-        ((PatientActivity)activity).replaceFragment(nextButton.getButtonType().getFragment());
+        ((PatientActivity)activity).replaceFragment(nextButton.getButtonType().getFragment(),enterAnimation,exitAnimation);
         currentButton = nextButton;
 
     }
