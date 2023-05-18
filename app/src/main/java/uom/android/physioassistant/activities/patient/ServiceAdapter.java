@@ -8,15 +8,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.ui.FragmentType;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
 
     private Context context;
+
     public ServiceAdapter(Context context){
         this.context = context;
     }
@@ -33,6 +36,17 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
         Glide.with(context).asBitmap().load(imageURL).into(holder.serviceImage);
+
+        holder.serviceImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                ((PatientActivity)context).getNavBar().setVisibility(View.GONE);
+                ((PatientActivity)context).replaceFragment(FragmentType.SERVICE_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
+            }
+        });
+
     }
 
     @Override
