@@ -72,6 +72,7 @@
             android:layout_margin="5dp"
             android:background="@color/secondary_light"
             android:ems="10"
+            android:textColor="@color/black"
             android:hint="@string/username_hint"
             android:inputType="text"
             android:padding="5dp" />
@@ -83,6 +84,7 @@
             android:layout_margin="5dp"
             android:background="@color/secondary_light"
             android:ems="10"
+            android:textColor="@color/black"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:padding="5dp" />

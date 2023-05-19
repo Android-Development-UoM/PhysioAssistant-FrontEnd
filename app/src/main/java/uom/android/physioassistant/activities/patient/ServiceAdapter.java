@@ -6,22 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
+import java.util.ArrayList;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.models.PhysioAction;
 import uom.android.physioassistant.ui.FragmentType;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
 
     private Context context;
+    private ArrayList<PhysioAction> physioActions;
 
-    public ServiceAdapter(Context context){
-        this.context = context;
+    private HomeFragment homeFragment;
+    public ServiceAdapter(HomeFragment homeFragment){
+        this.homeFragment = homeFragment;
     }
 
     @NonNull
@@ -35,23 +35,28 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
-        Glide.with(context).asBitmap().load(imageURL).into(holder.serviceImage);
+        Glide.with(homeFragment.getContext()).asBitmap().load(imageURL).into(holder.serviceImage);
 
+        holder.serviceName.setText(physioActions.get(position).getName());
         holder.serviceImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                ((PatientActivity)context).getNavBar().setVisibility(View.GONE);
-                ((PatientActivity)context).replaceFragment(FragmentType.SERVICE_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
+                PatientActivity patientActivity = (PatientActivity) homeFragment.getContext();
+                patientActivity.getNavBar().setVisibility(View.GONE);
+                patientActivity.replaceFragment(FragmentType.SERVICE_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out,
+                        homeFragment.serviceBundle(physioActions.get(position).getCode()));
             }
         });
 
     }
 
+    public void setPhysioActions(ArrayList<PhysioAction> physioActions) {
+        this.physioActions = physioActions;
+    }
+
     @Override
     public int getItemCount() {
-        return 10;
+        return physioActions.size();
     }
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{

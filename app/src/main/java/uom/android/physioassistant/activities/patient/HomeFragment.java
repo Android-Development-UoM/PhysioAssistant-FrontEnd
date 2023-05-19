@@ -16,7 +16,16 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.backend.api.PhysioActionApi;
+import uom.android.physioassistant.backend.retrofit.RetrofitService;
+import uom.android.physioassistant.models.PhysioAction;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +43,8 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView serviceRecyclerView;
+    private ArrayList<PhysioAction> physioActions;
+    private ServiceAdapter serviceAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -66,6 +77,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        Log.d("Home fragment","Created");
     }
 
     @Override
@@ -73,11 +85,46 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home,container,false);
-        ServiceAdapter serviceAdapter = new ServiceAdapter(view.getContext());
-        serviceRecyclerView = view.findViewById(R.id.servicesRecView);
-        serviceRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false));
-        serviceRecyclerView.setAdapter(serviceAdapter);
+
+        loadPhysioActions(view);
 
         return view;
     }
+
+    private void loadPhysioActions(View view) {
+        RetrofitService retrofitService = new RetrofitService();
+        PhysioActionApi physioActionApi = retrofitService.getRetrofit().create(PhysioActionApi.class);
+        physioActionApi.getPhysioActions().enqueue(new Callback<List<PhysioAction>>() {
+            @Override
+            public void onResponse(Call<List<PhysioAction>> call, Response<List<PhysioAction>> response) {
+                if(response.isSuccessful()){
+                    initRecyclerView(view,(ArrayList<PhysioAction>) response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PhysioAction>> call, Throwable t) {
+                Log.e("Error", " Failed to load physioactions", t);
+            }
+        });
+    }
+
+    private void initRecyclerView(View view , ArrayList<PhysioAction> physioActions){
+
+        serviceAdapter = new ServiceAdapter(this);
+        serviceAdapter.setPhysioActions(physioActions);
+        serviceRecyclerView = view.findViewById(R.id.servicesRecView);
+        serviceRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false));
+        serviceRecyclerView.setAdapter(serviceAdapter);
+    }
+
+    public Bundle serviceBundle(String serviceCode){
+        Bundle bundle = new Bundle();
+        bundle.putString("physio_action_code",serviceCode);
+        return bundle;
+    }
+
+
+
+
 }

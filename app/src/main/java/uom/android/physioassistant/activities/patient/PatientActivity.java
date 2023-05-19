@@ -35,6 +35,17 @@ public class PatientActivity extends AppCompatActivity {
                 setCustomAnimations(enterAnimation,exitAnimation);
         transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
+        
+
+    }
+
+    public void replaceFragment(Fragment fragment,int enterAnimation,int exitAnimation,Bundle bundle){
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().
+                setCustomAnimations(enterAnimation,exitAnimation);
+        fragment.setArguments(bundle);
+        transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.commit();
 
     }
 

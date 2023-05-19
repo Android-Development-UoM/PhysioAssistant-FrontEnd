@@ -3,20 +3,26 @@ package uom.android.physioassistant.activities.patient;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.backend.api.PhysioActionApi;
+import uom.android.physioassistant.backend.retrofit.RetrofitService;
+import uom.android.physioassistant.models.PhysioAction;
 import uom.android.physioassistant.ui.FragmentType;
-import uom.android.physioassistant.ui.NavBar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +41,8 @@ public class ServiceFragment extends Fragment {
     private String mParam2;
     private ImageView serviceImage;
     private ImageView backButton;
+    private TextView serviceName,serviceDescription,servicePrice;
+    private String code;
     public ServiceFragment() {
         // Required empty public constructor
     }
@@ -65,6 +73,8 @@ public class ServiceFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
@@ -84,6 +94,52 @@ public class ServiceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_service, container, false);
 
+        Bundle bundle = getArguments();
+        if(bundle!=null){
+            String code = bundle.getString("physio_action_code");
+            findPhysioActionById(view,code);
+        }
+
+
+        return view;
+    }
+
+    public void findPhysioActionById(View view,String code){
+
+        RetrofitService retrofitService = new RetrofitService();
+        PhysioActionApi physioActionApi = retrofitService.getRetrofit().create(PhysioActionApi.class);
+
+        physioActionApi.getServiceByCode(code).enqueue(new Callback<PhysioAction>() {
+            @Override
+            public void onResponse(Call<PhysioAction> call, Response<PhysioAction> response) {
+                Toast.makeText(ServiceFragment.this.getContext(), response.body().getName(), Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful()){
+                    initViews(view,response.body());
+                }
+                else{
+                    Log.e("Erorr", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PhysioAction> call, Throwable t) {
+                Log.e("Error", "onFailure: failed to find action by id");
+            }
+        });
+
+    }
+
+    private void initViews(View view,PhysioAction physioAction) {
+
+        serviceName = view.findViewById(R.id.serviceName);
+        serviceName.setText(physioAction.getName());
+
+        serviceDescription = view.findViewById(R.id.serviceDescription);
+        serviceDescription.setText(physioAction.getDescription());
+
+        servicePrice = view.findViewById(R.id.servicePrice);
+        servicePrice.setText(String.valueOf(physioAction.getCost()));
+
         serviceImage = view.findViewById(R.id.serviceImage);
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
         Glide.with(view.getContext()).asBitmap().load(imageURL).into(serviceImage);
@@ -96,6 +152,7 @@ public class ServiceFragment extends Fragment {
             }
         });
 
-        return view;
     }
+
+
 }
