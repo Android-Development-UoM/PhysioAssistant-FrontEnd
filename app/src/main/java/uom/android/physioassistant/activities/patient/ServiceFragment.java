@@ -5,22 +5,15 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.backend.api.PhysioActionApi;
-import uom.android.physioassistant.backend.retrofit.RetrofitService;
 import uom.android.physioassistant.models.PhysioAction;
 import uom.android.physioassistant.ui.FragmentType;
 
@@ -42,6 +35,7 @@ public class ServiceFragment extends Fragment {
     private ImageView serviceImage;
     private ImageView backButton;
     private TextView serviceName,serviceDescription,servicePrice;
+    private PhysioAction physioAction;
     private String code;
     public ServiceFragment() {
         // Required empty public constructor
@@ -96,40 +90,15 @@ public class ServiceFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if(bundle!=null){
-            String code = bundle.getString("physio_action_code");
-            findPhysioActionById(view,code);
+            physioAction = (PhysioAction) bundle.getSerializable("physio_action");
+            initViews(view);
         }
-
 
         return view;
     }
 
-    public void findPhysioActionById(View view,String code){
 
-        RetrofitService retrofitService = new RetrofitService();
-        PhysioActionApi physioActionApi = retrofitService.getRetrofit().create(PhysioActionApi.class);
-
-        physioActionApi.getServiceByCode(code).enqueue(new Callback<PhysioAction>() {
-            @Override
-            public void onResponse(Call<PhysioAction> call, Response<PhysioAction> response) {
-                Toast.makeText(ServiceFragment.this.getContext(), response.body().getName(), Toast.LENGTH_SHORT).show();
-                if(response.isSuccessful()){
-                    initViews(view,response.body());
-                }
-                else{
-                    Log.e("Erorr", response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PhysioAction> call, Throwable t) {
-                Log.e("Error", "onFailure: failed to find action by id");
-            }
-        });
-
-    }
-
-    private void initViews(View view,PhysioAction physioAction) {
+    private void initViews(View view) {
 
         serviceName = view.findViewById(R.id.serviceName);
         serviceName.setText(physioAction.getName());
@@ -138,7 +107,7 @@ public class ServiceFragment extends Fragment {
         serviceDescription.setText(physioAction.getDescription());
 
         servicePrice = view.findViewById(R.id.servicePrice);
-        servicePrice.setText(String.valueOf(physioAction.getCost()));
+        servicePrice.setText(String.valueOf(physioAction.getCostPerSession())+"$");
 
         serviceImage = view.findViewById(R.id.serviceImage);
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";

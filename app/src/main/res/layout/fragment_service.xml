@@ -45,14 +45,12 @@
                         android:id="@+id/serviceName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:text="@string/service_name"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:textSize="27dp" />
+                        android:textSize="23dp" />
 
                     <TextView
-                        android:layout_marginTop="5dp"
                         android:id="@+id/servicePrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -65,7 +63,6 @@
 
                 <TextView
                     android:id="@+id/divider"
-                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/light_gray"

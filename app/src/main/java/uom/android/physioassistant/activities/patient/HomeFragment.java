@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        Log.d("Home fragment","Created");
     }
 
     @Override
@@ -118,9 +117,9 @@ public class HomeFragment extends Fragment {
         serviceRecyclerView.setAdapter(serviceAdapter);
     }
 
-    public Bundle serviceBundle(String serviceCode){
+    public Bundle serviceBundle(PhysioAction physioAction){
         Bundle bundle = new Bundle();
-        bundle.putString("physio_action_code",serviceCode);
+        bundle.putSerializable("physio_action",physioAction);
         return bundle;
     }
 

@@ -1,17 +1,19 @@
 package uom.android.physioassistant.models;
 
-public class PhysioAction {
+import java.io.Serializable;
+
+public class PhysioAction implements Serializable {
 
     private String code;
     private String name;
     private String description;
-    private double cost;
+    private double costPerSession;
 
-    public PhysioAction(String code, String name, String description, double cost) {
+    public PhysioAction(String code, String name, String description, double costPerSession) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.cost = cost;
+        this.costPerSession = costPerSession;
     }
 
     public String getCode() {
@@ -38,10 +40,10 @@ public class PhysioAction {
         this.description = description;
     }
 
-    public double getCost() {
-        return cost;
+    public double getCostPerSession() {
+        return costPerSession;
     }
-    public void setCost(double cost) {
-        this.cost = cost;
+    public void setCostPerSession(double costPerSession) {
+        this.costPerSession = costPerSession;
     }
 }
