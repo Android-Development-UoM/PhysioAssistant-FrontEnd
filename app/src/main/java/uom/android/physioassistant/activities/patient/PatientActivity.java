@@ -6,6 +6,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.ui.ButtonType;
@@ -34,8 +36,8 @@ public class PatientActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().
                 setCustomAnimations(enterAnimation,exitAnimation);
         transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
-        
 
     }
 
@@ -45,10 +47,23 @@ public class PatientActivity extends AppCompatActivity {
                 setCustomAnimations(enterAnimation,exitAnimation);
         fragment.setArguments(bundle);
         transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+
+        if (fragment instanceof ServiceFragment) {
+            replaceFragment(FragmentType.HOME_FRAGMENT.getFragment(), R.anim.fade_in, R.anim.fade_out);
+            navBar.setVisibility(View.VISIBLE);
+        }
+        else{
+            navBar.undo();
+        }
+    }
 
     public PatientNavBar getNavBar() {
         return navBar;

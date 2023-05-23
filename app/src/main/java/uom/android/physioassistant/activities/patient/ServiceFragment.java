@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,12 +68,10 @@ public class ServiceFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
-
+                Log.d("Debug Nav", "handleOnBackPressed: serviceFragment");
                 PatientActivity patientActivity = (PatientActivity) requireActivity();
                 patientActivity.replaceFragment(FragmentType.HOME_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out );
                 patientActivity.getNavBar().setVisibility(View.VISIBLE);

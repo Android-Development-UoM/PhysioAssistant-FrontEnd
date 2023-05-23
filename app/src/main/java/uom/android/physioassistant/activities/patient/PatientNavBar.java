@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.ui.ButtonType;
@@ -34,6 +35,8 @@ public class PatientNavBar extends NavBar {
 
         NavButton profileButton = activity.findViewById(R.id.profileButton);
         profileButton.setButtonType(ButtonType.PATIENT_PROFILE);
+
+        backStack = new Stack<>();
 
         currentButton = homeButton;
 
