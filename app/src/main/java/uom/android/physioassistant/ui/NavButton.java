@@ -34,6 +34,10 @@ public class NavButton extends androidx.appcompat.widget.AppCompatImageView {
         return buttonType;
     }
 
+    public Fragment getFragment(){
+        return buttonType.getFragment();
+    }
+
     public void setButtonType(ButtonType buttonType) {
         this.buttonType = buttonType;
     }

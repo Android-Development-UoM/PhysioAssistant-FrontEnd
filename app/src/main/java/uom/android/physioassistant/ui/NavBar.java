@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -55,13 +58,21 @@ public abstract class NavBar extends RelativeLayout {
 
         resetButtons();
         nextButton.setPressed();
+        int enterAnimation,exitAnimation;
 
         float offset = nextButton.getX()-currentButton.getX();
+        enterAnimation = R.anim.enter_left_to_right;
+        exitAnimation = R.anim.exit_left_to_right;
+        if(offset>0){
+            enterAnimation = R.anim.enter_right_to_left;
+            exitAnimation = R.anim.exit_right_to_left;
+        }
 
-        ((PatientActivity)activity).replaceFragment(nextButton.getButtonType().getFragment());
+        ((PatientActivity)activity).replaceFragment(nextButton.getFragment(),enterAnimation,exitAnimation);
         currentButton = nextButton;
 
     }
+    
 
     public void resetButtons(){
         for(NavButton button:buttons){

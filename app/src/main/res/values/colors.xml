@@ -9,6 +9,8 @@
     <color name="button_idle">#A8AFAF</color>
     <color name="button_pressed">#213BC4</color>
     <color name="gray">#A59C9C</color>
+    <color name="dark_gray">#736F6F</color>
+    <color name="light_gray">#E0DADA</color>
 
     <color name="error_red">#DC3545</color>
     <color name="success_green">#28a745</color>

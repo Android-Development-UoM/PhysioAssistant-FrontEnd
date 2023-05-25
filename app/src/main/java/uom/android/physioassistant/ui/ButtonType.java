@@ -9,16 +9,16 @@ import uom.android.physioassistant.activities.patient.ProfileFragment;
 
 public enum ButtonType {
 
-    PATIENT_HOME(R.drawable.ic_home,R.drawable.ic_home_pressed,new HomeFragment()),
-    PATIENT_CALENDAR(R.drawable.ic_calendar,R.drawable.ic_calendar_pressed,new CalendarFragment()),
-    PATIENT_PROFILE(R.drawable.ic_profile,R.drawable.ic_profile_pressed,new ProfileFragment());
+    PATIENT_HOME(R.drawable.ic_home,R.drawable.ic_home_pressed,FragmentType.HOME_FRAGMENT),
+    PATIENT_CALENDAR(R.drawable.ic_calendar,R.drawable.ic_calendar_pressed,FragmentType.CALENDAR_FRAGMENT),
+    PATIENT_PROFILE(R.drawable.ic_profile,R.drawable.ic_profile_pressed,FragmentType.PROFILE_FRAGMENT);
 
     private int pressed,idle;
-    private Fragment fragment;
-    ButtonType(int idle,int pressed,Fragment fragment){
+    private FragmentType fragmentType;
+    ButtonType(int idle,int pressed,FragmentType fragmentType){
         this.idle =idle;
         this.pressed = pressed;
-        this.fragment = fragment;
+        this.fragmentType = fragmentType;
     }
 
     public int getPressed() {
@@ -30,6 +30,6 @@ public enum ButtonType {
     }
 
     public Fragment getFragment() {
-        return fragment;
+        return fragmentType.getFragment();
     }
 }
