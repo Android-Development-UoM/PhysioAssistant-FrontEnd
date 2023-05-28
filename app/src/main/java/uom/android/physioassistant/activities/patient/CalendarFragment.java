@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +48,13 @@ public class CalendarFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private RecyclerView appointmentRecyclerView;
+    private AppointmentAdapter appointmentAdapter;
     private ArrayList<String> currentAppointments;
     private ArrayList<String> historyAppointments;
     private TextView historyButton,currentButton;
     private TextView underlineCurrent,underlineHistory;
     private RelativeLayout currentLayout,historyLayout;
+    private FloatingActionButton createAppointmentButton;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -85,12 +90,38 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_calendar,container,false);
-        appointmentRecyclerView = view.findViewById(R.id.appointmentRecyclerView);
-        appointmentRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
 
+        initViews(view);
+
+        currentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCurrentPressed(view);
+            }
+        });
+
+        historyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHistoryPressed(view);
+
+            }
+        });
+
+        createAppointmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(view.getContext(), "Button pressed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
+    }
+
+
+    private void initLists(){
 
         historyAppointments = new ArrayList<>();
         historyAppointments.add("Αθλητική Μάλαξη 1");
@@ -106,13 +137,14 @@ public class CalendarFragment extends Fragment {
         currentAppointments.add("Αθλητική Μάλαξη 9");
         currentAppointments.add("Αθλητική Μάλαξη 10");
 
-        AppointmentAdapter appointmentAdapter = new AppointmentAdapter(view.getContext());
-        appointmentAdapter.setAppointments(currentAppointments);
-        appointmentRecyclerView.setAdapter(appointmentAdapter);
+    }
+
+    private  void initViews(View view){
+
+        createAppointmentButton = view.findViewById(R.id.createAppointmentButton);
 
         currentButton = view.findViewById(R.id.currentButton);
         historyButton = view.findViewById(R.id.historyButton);
-
 
         underlineCurrent = view.findViewById(R.id.underlineCurrent);
         underlineHistory = view.findViewById(R.id.underlineHistory);
@@ -120,37 +152,36 @@ public class CalendarFragment extends Fragment {
         currentLayout = view.findViewById(R.id.currentLayout);
         historyLayout = view.findViewById(R.id.historyLayout);
 
-        currentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentButton.setTextColor(Color.BLACK);
-                underlineCurrent.setBackgroundColor(Color.BLACK);
+        initLists();
+        appointmentAdapter = new AppointmentAdapter(view.getContext());
+        appointmentAdapter.setAppointments(currentAppointments);
 
-                historyButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
-                underlineHistory.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+        appointmentRecyclerView = view.findViewById(R.id.appointmentRecyclerView);
+        appointmentRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
+        appointmentRecyclerView.setAdapter(appointmentAdapter);
 
-                appointmentAdapter.setAppointments(currentAppointments);
-                appointmentAdapter.notifyDataSetChanged();
-                underlineCurrent.setTextColor(Color.BLUE);
-            }
-        });
+    }
 
-        historyLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                historyButton.setTextColor(Color.BLACK);
-                underlineHistory.setBackgroundColor(Color.BLACK);
+    private void setHistoryPressed(View view){
+        historyButton.setTextColor(Color.BLACK);
+        underlineHistory.setBackgroundColor(Color.BLACK);
 
-                currentButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
-                underlineCurrent.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+        currentButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+        underlineCurrent.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
 
-                appointmentAdapter.setAppointments(historyAppointments);
-                appointmentAdapter.notifyDataSetChanged();
+        appointmentAdapter.setAppointments(historyAppointments);
+        appointmentAdapter.notifyDataSetChanged();
+    }
 
-            }
-        });
+    private void setCurrentPressed(View view){
+        currentButton.setTextColor(Color.BLACK);
+        underlineCurrent.setBackgroundColor(Color.BLACK);
 
-        return view;
+        historyButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+        underlineHistory.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.gray));
+
+        appointmentAdapter.setAppointments(currentAppointments);
+        appointmentAdapter.notifyDataSetChanged();
     }
 
 

@@ -40,7 +40,6 @@ public abstract class NavBar extends RelativeLayout {
     protected abstract void init();
 
     public void handleClicks() {
-        System.out.println(buttons.size());
         for (NavButton button : buttons) {
             button.setOnClickListener(new OnClickListener() {
                 @Override

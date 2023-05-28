@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/welcome_text"
                 android:textColor="@color/black"
-                android:textSize="40dp"
+                android:textSize="35dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,15 +46,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="48dp"
                 android:text="@string/upcoming_appointment"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -112,11 +113,11 @@
                             android:id="@+id/address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/dateText"
-                            android:layout_marginLeft="10dp"
                             android:layout_below="@id/serviceName"
                             android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginTop="3dp"
+                            android:layout_toEndOf="@id/dateText"
                             android:text="@string/address_text"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
@@ -132,6 +133,7 @@
                         app:cardCornerRadius="20dp">
 
                         <TextView
+                            android:id="@+id/daysLeft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
@@ -153,7 +155,7 @@
                 android:layout_marginTop="55dp"
                 android:text="@string/service_text"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
