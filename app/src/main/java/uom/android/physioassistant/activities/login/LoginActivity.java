@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     Spinner selectUserType;
     RetrofitService retrofitService;
     AuthenticationApi authenticationApi;
+    GifImageView loadingGif;
     String selectedUser;
 
     @Override
@@ -72,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         this.errorMsg = findViewById(R.id.error_msg);
         this.loginBtn = findViewById(R.id.login_btn);
         this.selectUserType = (Spinner) findViewById(R.id.select_user_spinner);
+        this.loadingGif = findViewById(R.id.loading_gif);
     }
 
     // Helper method to configure spinner
@@ -110,6 +113,9 @@ public class LoginActivity extends AppCompatActivity {
             showErrorMessage("Παρακαλώ επιλέξτε τύπο χρήστη.");
 
         else {
+            // Show loading animation
+            this.loadingGif.setVisibility(View.VISIBLE);
+
             // Check if username and password were provided
             if (credentialsProvided(username, password)){
                 // Create a LoginRequest object with the entered credentials
@@ -174,6 +180,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Log.i("Login", "Login Failed");
 
+                    // Hide Loading Animation
+                    loadingGif.setVisibility(View.GONE);
+
                     // Show an error message to ui
                     showErrorMessage("Λάθος username και/ή password.");
                 }
@@ -185,6 +194,10 @@ public class LoginActivity extends AppCompatActivity {
                 Log.w("Login Error", "Api call failed");
                 // Log the error message
                 Log.e("Error", t.getMessage());
+
+                // Hide Loading Animation
+                loadingGif.setVisibility(View.GONE);
+
                 showErrorMessage("Σφάλμα Σύνδεσης. Προσπαθήστε ξανά αργότερα.");
             }
         });
