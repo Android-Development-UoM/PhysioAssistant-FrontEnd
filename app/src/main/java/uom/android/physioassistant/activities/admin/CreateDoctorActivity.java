@@ -113,7 +113,7 @@ public class CreateDoctorActivity extends AppCompatActivity {
                                     .show();
                         }
                         else if (response.code() == 409 ){
-                            showMessage("Το Φυσικοθεραπευτήριο με Username: " + doctor.getAfm() + " υπάρχει ήδη.", R.color.error_red);
+                            showMessage("Το username: " + doctor.getUsername() + " υπάρχει ήδη.", R.color.error_red);
                         }
                         else {
                             showMessage("Το Φυσικοθεραπευτήριο δεν αποθηκεύτηκε.", R.color.error_red);
