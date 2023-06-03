@@ -22,8 +22,8 @@
 
     <LinearLayout
         android:id="@+id/login_layout"
-        android:layout_width="379dp"
-        android:layout_height="450dp"
+        android:layout_width="376dp"
+        android:layout_height="476dp"
         android:orientation="vertical"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,6 +48,13 @@
             android:textAlignment="center"
             android:textColor="@color/error_red"
             android:visibility="invisible" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/loading_gif"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:src="@drawable/loading"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/login_as_prompt"
