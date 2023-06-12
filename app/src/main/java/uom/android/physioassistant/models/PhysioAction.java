@@ -2,7 +2,9 @@ package uom.android.physioassistant.models;
 
 import java.io.Serializable;
 
-public class PhysioAction implements Serializable {
+import uom.android.physioassistant.ui.DropDownItem;
+
+public class PhysioAction implements Serializable, DropDownItem {
 
     private String code;
     private String name;
@@ -14,6 +16,14 @@ public class PhysioAction implements Serializable {
         this.name = name;
         this.description = description;
         this.costPerSession = costPerSession;
+    }
+
+
+    public String getFormattedCost(){
+        if(costPerSession % 1 == 0){
+            return String.format("%.0f$",costPerSession);
+        }
+        return String.format("%.2f$", costPerSession).replace(",", ".");
     }
 
     public String getCode() {
@@ -45,5 +55,20 @@ public class PhysioAction implements Serializable {
     }
     public void setCostPerSession(double costPerSession) {
         this.costPerSession = costPerSession;
+    }
+
+    @Override
+    public String toString() {
+        return "PhysioAction{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", costPerSession=" + costPerSession +
+                '}';
+    }
+
+    @Override
+    public String getText() {
+        return this.name;
     }
 }

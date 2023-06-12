@@ -6,7 +6,8 @@
     <string name="password_hint">Password</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="welcome_text">Πως αισθάνεσε σήμερα;</string>
+    <string name="welcome_patient_text">Πως αισθάνεσε σήμερα;</string>
+    <string name="welcome_doctor_text">Καλώς ήρθες</string>
     <string name="date_text">Δευτέρα, 8 Μαίου</string>
     <string name="upcoming_appointment">Επερχόμενο ραντεβού</string>
     <string name="service_name">Αθλητική Μάλαξη</string>

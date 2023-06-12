@@ -12,23 +12,24 @@
         android:id="@+id/logo_img"
         android:layout_width="256dp"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/login_layout"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
         app:srcCompat="@drawable/logo_white" />
 
     <LinearLayout
         android:id="@+id/login_layout"
-        android:layout_width="379dp"
-        android:layout_height="450dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_img">
 
         <TextView
             android:id="@+id/login_prompt"
@@ -62,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="5dp"
-            android:background="@color/secondary_light"
+            android:background="?colorOnSecondary"
             android:entries="@array/user_types" />
 
         <EditText
@@ -70,34 +71,34 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="5dp"
-            android:background="@color/secondary_light"
+            android:background="?colorOnSecondary"
             android:ems="10"
-            android:textColor="@color/black"
             android:hint="@string/username_hint"
             android:inputType="text"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:textColor="?android:textColorPrimary" />
 
         <EditText
             android:id="@+id/password_input"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_margin="5dp"
-            android:background="@color/secondary_light"
+            android:background="?colorOnSecondary"
             android:ems="10"
-            android:textColor="@color/black"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:textColor="?android:textColorPrimary" />
 
         <Button
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="69dp"
             android:layout_margin="5dp"
-            android:backgroundTint="@color/secondary_light"
+            android:backgroundTint="?colorOnSecondary"
             android:onClick="handleLogin"
             android:text="@string/login_text"
-            android:textColor="@color/primary_dark"
+            android:textColor="?android:textColorPrimary"
             android:textSize="20sp" />
 
     </LinearLayout>

@@ -2,10 +2,8 @@ package uom.android.physioassistant.activities.patient;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.FragmentNavigation;
+import uom.android.physioassistant.activities.OnBackPressedListener;
 import uom.android.physioassistant.models.PhysioAction;
 import uom.android.physioassistant.ui.FragmentType;
 
@@ -23,7 +23,7 @@ import uom.android.physioassistant.ui.FragmentType;
  * Use the {@link ServiceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ServiceFragment extends Fragment {
+public class ServiceFragment extends Fragment implements OnBackPressedListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,17 +68,6 @@ public class ServiceFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-            @Override
-            public void handleOnBackPressed() {
-                Log.d("Debug Nav", "handleOnBackPressed: serviceFragment");
-                PatientActivity patientActivity = (PatientActivity) requireActivity();
-                patientActivity.replaceFragment(FragmentType.HOME_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out );
-                patientActivity.getNavBar().setVisibility(View.VISIBLE);
-            }
-        };
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-
     }
 
     @Override
@@ -99,7 +88,7 @@ public class ServiceFragment extends Fragment {
 
     private void initViews(View view) {
 
-        serviceName = view.findViewById(R.id.serviceName);
+        serviceName = view.findViewById(R.id.doctorName);
         serviceName.setText(physioAction.getName());
 
         serviceDescription = view.findViewById(R.id.serviceDescription);
@@ -123,4 +112,10 @@ public class ServiceFragment extends Fragment {
     }
 
 
+    @Override
+    public void onBackPressed(FragmentNavigation navigation) {
+        PatientActivity activity = (PatientActivity) navigation;
+        activity.replaceFragment(FragmentType.PATIENT_HOME_FRAGMENT.getFragment(), R.anim.fade_in, R.anim.fade_out);
+        activity.getNavBar().setVisibility(View.VISIBLE);
+    }
 }

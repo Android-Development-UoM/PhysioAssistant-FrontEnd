@@ -1,4 +1,4 @@
-package uom.android.physioassistant.activities.patient;
+package uom.android.physioassistant.activities.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -21,6 +21,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.patient.PatientActivity;
+import uom.android.physioassistant.activities.patient.PatientHomeFragment;
 import uom.android.physioassistant.backend.api.PhysioActionApi;
 import uom.android.physioassistant.backend.retrofit.RetrofitService;
 import uom.android.physioassistant.models.PhysioAction;
@@ -28,12 +30,12 @@ import uom.android.physioassistant.ui.FragmentType;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
 
-    private Context context;
-    private ArrayList<PhysioAction> physioActions;
 
-    private HomeFragment homeFragment;
-    public ServiceAdapter(HomeFragment homeFragment){
-        this.homeFragment = homeFragment;
+    private ArrayList<PhysioAction> physioActions;
+    private Context context;
+    private PatientHomeFragment patientHomeFragment;
+    public ServiceAdapter(Context context){
+        this.context = context;
     }
 
     @NonNull
@@ -47,7 +49,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
-        Glide.with(homeFragment.getContext()).asBitmap().load(imageURL).into(holder.serviceImage);
+        Glide.with(patientHomeFragment.getContext()).asBitmap().load(imageURL).into(holder.serviceImage);
         holder.serviceName.setText(physioActions.get(position).getName());
         holder.serviceImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +77,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
             public void onResponse(Call<PhysioAction> call, Response<PhysioAction> response) {
                 if(response.isSuccessful()){
                     PhysioAction physioAction = response.body();
-                    PatientActivity patientActivity = (PatientActivity) homeFragment.getContext();
+                    PatientActivity patientActivity = (PatientActivity) patientHomeFragment.getContext();
                     patientActivity.getNavBar().setVisibility(View.GONE);
                     patientActivity.replaceFragment(FragmentType.SERVICE_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out,
-                            homeFragment.serviceBundle(physioAction));
+                            patientHomeFragment.serviceBundle(physioAction));
+
                 }
                 else{
                     printErrorMessage(response);
@@ -104,7 +107,9 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         }
     }
 
-
+    public void setHomeFragment(PatientHomeFragment patientHomeFragment) {
+        this.patientHomeFragment = patientHomeFragment;
+    }
 
     public static class ViewHolder extends  RecyclerView.ViewHolder{
 
@@ -116,7 +121,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
             super(itemView);
 
             serviceImage = itemView.findViewById(R.id.serviceImage);
-            serviceName = itemView.findViewById(R.id.serviceName);
+            serviceName = itemView.findViewById(R.id.doctorName);
 
         }
     }

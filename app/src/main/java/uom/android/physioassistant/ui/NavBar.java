@@ -3,19 +3,18 @@ package uom.android.physioassistant.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.FragmentNavigation;
+import uom.android.physioassistant.activities.doctor.DoctorActivity;
 import uom.android.physioassistant.activities.patient.PatientActivity;
-import uom.android.physioassistant.activities.patient.PatientNavBar;
 
 public abstract class NavBar extends RelativeLayout {
 
@@ -37,7 +36,7 @@ public abstract class NavBar extends RelativeLayout {
     }
 
 
-    protected abstract void init();
+    protected abstract void init(Context context);
 
     public void handleClicks() {
         for (NavButton button : buttons) {
@@ -54,12 +53,9 @@ public abstract class NavBar extends RelativeLayout {
 
     public void setActivity(Activity activity) {
         this.activity = activity;
-        init();
-
     }
 
     public void undo() {
-
         if (!backStack.isEmpty()) {
             NavButton prevButton = backStack.pop();
             transition(prevButton);
@@ -83,9 +79,17 @@ public abstract class NavBar extends RelativeLayout {
             exitAnimation = R.anim.exit_right_to_left;
         }
 
-        ((PatientActivity) activity).replaceFragment(nextButton.getFragment(), enterAnimation, exitAnimation);
+        ((FragmentNavigation) activity).replaceFragment(nextButton.getFragment(), enterAnimation, exitAnimation);
         currentButton = nextButton;
+    }
 
+    public void transition(Fragment fragment){
+        for(NavButton button:buttons){
+            if(button.getButtonType().getFragment().equals(fragment)){
+                backStack.push(currentButton);
+                transition(button);
+            }
+        }
     }
 
     public void resetButtons() {

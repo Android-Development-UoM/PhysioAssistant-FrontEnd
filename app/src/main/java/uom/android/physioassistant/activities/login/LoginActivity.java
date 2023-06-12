@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +27,9 @@ import uom.android.physioassistant.backend.api.AuthenticationApi;
 import uom.android.physioassistant.backend.requests.LoginRequest;
 import uom.android.physioassistant.backend.responses.LoginResponse;
 import uom.android.physioassistant.backend.retrofit.RetrofitService;
+import uom.android.physioassistant.models.Doctor;
+import uom.android.physioassistant.models.PhysioAction;
+import uom.android.physioassistant.models.User;
 import uom.android.physioassistant.models.UserType;
 
 /**
@@ -41,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     RetrofitService retrofitService;
     AuthenticationApi authenticationApi;
     String selectedUser;
+    ArrayList<PhysioAction> physioActions;
+    ArrayList<Doctor> doctors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize RetrofitService and AuthenticationApi for making API calls
         this.retrofitService = new RetrofitService();
         this.authenticationApi = retrofitService.getRetrofit().create(AuthenticationApi.class);
+
+        Intent intent = getIntent();
+        physioActions = (ArrayList<PhysioAction>) intent.getSerializableExtra("physio_actions");
+        doctors = (ArrayList<Doctor>) intent.getSerializableExtra("doctors");
 
         configureSpinner();
 
@@ -161,6 +172,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
                 Log.i("Login", "Api call done.");   // Log that the API call was completed
 
+                System.out.println(response.body());
                 // Get the login response from the API call
                 LoginResponse loginResponse = response.body();
 
@@ -169,7 +181,11 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i("Login", "Login Successful");
 
                     // Create a new Intent for the next activity
+                    User user = response.body().getUser();
                     Intent next_activity = new Intent(LoginActivity.this, activityClass);
+                    next_activity.putExtra("user",user);
+                    next_activity.putExtra("physio_actions",physioActions);
+                    next_activity.putExtra("doctors",doctors);
                     startActivity(next_activity);
                 } else {
                     Log.i("Login", "Login Failed");
