@@ -1,8 +1,10 @@
 package uom.android.physioassistant.models;
 
-public class User {
-    private String username;
-    private String password;
+import java.io.Serializable;
+
+public class User implements Serializable {
+    protected String username;
+    protected String password;
 
     public User() {}
 
@@ -25,5 +27,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

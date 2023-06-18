@@ -4,71 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.patient.CalendarFragment">
+    tools:context=".activities.patient.PatientCalendarFragment">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="20dp"
-        android:paddingRight="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="?navBarColor"
+        app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
-            android:background="@drawable/selectable_item_background"
-            android:id="@+id/currentLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/currentButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp"
-                android:text="Τρέχων"
-                android:textColor="@color/black"
-                android:textSize="25dp" />
-
-            <TextView
-                android:id="@+id/underlineCurrent"
-                android:layout_width="150dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/currentButton"
-                android:background="@color/black"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:background="@drawable/selectable_item_background"
-            android:id="@+id/historyLayout"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true">
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/historyButton"
-                android:layout_width="wrap_content"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/currentButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/blue"
+                android:text="Τρέχων"
+                android:textSize="@dimen/text_size_small"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toStartOf="@+id/historyButton"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/historyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:backgroundTint="@color/white"
                 android:text="Ιστορικό"
-                android:textColor="@color/gray"
-                android:textSize="25dp" />
+                android:textSize="@dimen/text_size_small"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/currentButton"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/underlineHistory"
-                android:layout_width="150dp"
-                android:layout_height="2dp"
-                android:layout_below="@id/historyButton"
-                android:background="@color/gray" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/appointmentRecyclerView"
@@ -77,16 +75,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createAppointmentButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:outlineSpotShadowColor="@color/black"
         android:src="@drawable/ic_plus"
+        app:backgroundTint="@color/blue"
+        app:fabCustomSize="@dimen/plus_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/noAppointmentsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Δεν έχεις κανένα ραντεβού"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
