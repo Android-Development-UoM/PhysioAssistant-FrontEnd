@@ -12,25 +12,24 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.threeten.bp.LocalTime;
 
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.activities.FragmentNavigation;
-import uom.android.physioassistant.activities.OnBackPressedListener;
+import uom.android.physioassistant.ui.fragments.FragmentNavigation;
+import uom.android.physioassistant.listeners.OnBackPressedListener;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
 import uom.android.physioassistant.backend.events.DoctorLoadedEvent;
 import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
 import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
-import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.Doctor;
-import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.models.appointment.Appointment;
+import uom.android.physioassistant.models.users.doctor.Doctor;
+import uom.android.physioassistant.models.users.patient.Patient;
 import uom.android.physioassistant.models.PhysioAction;
-import uom.android.physioassistant.models.User;
-import uom.android.physioassistant.ui.DoctorNavBar;
-import uom.android.physioassistant.ui.FragmentType;
+import uom.android.physioassistant.models.users.User;
+import uom.android.physioassistant.ui.navigation.DoctorNavBar;
+import uom.android.physioassistant.ui.common.FragmentType;
 
 public class DoctorActivity extends AppCompatActivity implements FragmentNavigation {
 

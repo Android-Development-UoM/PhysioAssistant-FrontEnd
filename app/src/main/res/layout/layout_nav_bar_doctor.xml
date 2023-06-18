@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
 
-    <uom.android.physioassistant.ui.NavItem
+    <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/homeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <uom.android.physioassistant.ui.NavButton
+        <uom.android.physioassistant.ui.navigation.NavButton
             android:id="@+id/homeButton"
             android:layout_width="@dimen/nav_button_size"
             android:layout_height="@dimen/nav_button_size"
@@ -35,10 +35,10 @@
             app:layout_constraintStart_toStartOf="@+id/homeButton"
             app:layout_constraintTop_toBottomOf="@+id/homeButton" />
 
-    </uom.android.physioassistant.ui.NavItem>
+    </uom.android.physioassistant.ui.navigation.NavItem>
 
 
-    <uom.android.physioassistant.ui.NavItem
+    <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/calendarLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toEndOf="@+id/patientsLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <uom.android.physioassistant.ui.NavButton
+        <uom.android.physioassistant.ui.navigation.NavButton
             android:id="@+id/calendarButton"
             android:layout_width="@dimen/nav_button_size"
             android:layout_height="@dimen/nav_button_size"
@@ -68,10 +68,10 @@
             app:layout_constraintStart_toStartOf="@+id/calendarButton"
             app:layout_constraintTop_toBottomOf="@+id/calendarButton" />
 
-    </uom.android.physioassistant.ui.NavItem>
+    </uom.android.physioassistant.ui.navigation.NavItem>
 
 
-    <uom.android.physioassistant.ui.NavItem
+    <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/patientsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
         app:layout_constraintStart_toEndOf="@+id/homeLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <uom.android.physioassistant.ui.NavButton
+        <uom.android.physioassistant.ui.navigation.NavButton
             android:id="@+id/patientsButton"
             android:layout_width="@dimen/nav_button_size"
             android:layout_height="@dimen/nav_button_size"
@@ -101,10 +101,10 @@
             app:layout_constraintStart_toStartOf="@+id/patientsButton"
             app:layout_constraintTop_toBottomOf="@+id/patientsButton" />
 
-    </uom.android.physioassistant.ui.NavItem>
+    </uom.android.physioassistant.ui.navigation.NavItem>
 
 
-    <uom.android.physioassistant.ui.NavItem
+    <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/notificationLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
         app:layout_constraintStart_toEndOf="@+id/calendarLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <uom.android.physioassistant.ui.NavButton
+        <uom.android.physioassistant.ui.navigation.NavButton
             android:id="@+id/notificationsButton"
             android:layout_width="@dimen/nav_button_size"
             android:layout_height="@dimen/nav_button_size"
@@ -147,7 +147,7 @@
             app:layout_constraintEnd_toEndOf="@+id/notificationsButton"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </uom.android.physioassistant.ui.NavItem>
+    </uom.android.physioassistant.ui.navigation.NavItem>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

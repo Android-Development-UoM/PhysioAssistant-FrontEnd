@@ -2,7 +2,7 @@ package uom.android.physioassistant.models;
 
 import java.io.Serializable;
 
-import uom.android.physioassistant.ui.DropDownItem;
+import uom.android.physioassistant.ui.dropdown.DropDownItem;
 
 public class PhysioAction implements Serializable, DropDownItem {
 

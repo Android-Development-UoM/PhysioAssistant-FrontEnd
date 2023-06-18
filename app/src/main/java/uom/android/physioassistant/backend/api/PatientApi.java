@@ -5,7 +5,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.models.users.patient.Patient;
 
 public interface PatientApi {
 

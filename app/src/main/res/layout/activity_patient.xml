@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <uom.android.physioassistant.ui.PatientNavBar
+    <uom.android.physioassistant.ui.navigation.PatientNavBar
         android:id="@+id/navBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +27,6 @@
         android:elevation="10dp"
         android:padding="5dp">
 
-    </uom.android.physioassistant.ui.PatientNavBar>
+    </uom.android.physioassistant.ui.navigation.PatientNavBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

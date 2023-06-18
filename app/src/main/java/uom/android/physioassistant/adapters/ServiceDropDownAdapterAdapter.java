@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.ui.DropDownClickListener;
+import uom.android.physioassistant.listeners.DropDownClickListener;
 import uom.android.physioassistant.models.PhysioAction;
 
 public class ServiceDropDownAdapterAdapter extends RecyclerView.Adapter<ServiceDropDownAdapterAdapter.ViewHolder> implements IDropDownAdapter {

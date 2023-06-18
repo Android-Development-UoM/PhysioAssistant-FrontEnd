@@ -22,11 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.patient.PatientActivity;
-import uom.android.physioassistant.activities.patient.PatientHomeFragment;
+import uom.android.physioassistant.ui.fragments.patient.home.PatientHomeFragment;
 import uom.android.physioassistant.backend.api.PhysioActionApi;
-import uom.android.physioassistant.backend.retrofit.RetrofitService;
+import uom.android.physioassistant.backend.retrofit.BackendAPI;
 import uom.android.physioassistant.models.PhysioAction;
-import uom.android.physioassistant.ui.FragmentType;
+import uom.android.physioassistant.ui.common.FragmentType;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHolder> {
 
@@ -70,8 +70,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     }
 
     public void findPhysioActionById(String code){
-        RetrofitService retrofitService = new RetrofitService();
-        PhysioActionApi physioActionApi = retrofitService.getRetrofit().create(PhysioActionApi.class);
+        BackendAPI backendAPI = new BackendAPI();
+        PhysioActionApi physioActionApi = backendAPI.getRetrofit().create(PhysioActionApi.class);
         physioActionApi.getServiceByCode(code).enqueue(new Callback<PhysioAction>() {
             @Override
             public void onResponse(Call<PhysioAction> call, Response<PhysioAction> response) {

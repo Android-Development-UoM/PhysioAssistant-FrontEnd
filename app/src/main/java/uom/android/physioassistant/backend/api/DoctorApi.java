@@ -8,11 +8,10 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import uom.android.physioassistant.activities.doctor.CreatePatientFragment;
 import uom.android.physioassistant.backend.requests.CreateDoctorRequest;
 import uom.android.physioassistant.backend.requests.CreatePatientRequest;
-import uom.android.physioassistant.models.Doctor;
-import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.models.users.doctor.Doctor;
+import uom.android.physioassistant.models.users.patient.Patient;
 
 public interface DoctorApi {
     @POST("api/doctors/create")

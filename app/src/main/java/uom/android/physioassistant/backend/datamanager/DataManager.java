@@ -30,31 +30,29 @@ import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
 import uom.android.physioassistant.backend.events.PhysioActionCreatedEvent;
 import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
 import uom.android.physioassistant.backend.requests.AppointmentRequest;
-import uom.android.physioassistant.backend.requests.CreateDoctorRequest;
 import uom.android.physioassistant.backend.requests.CreatePatientRequest;
-import uom.android.physioassistant.backend.responses.ErrorResponse;
-import uom.android.physioassistant.backend.retrofit.RetrofitService;
-import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.AppointmentStatus;
-import uom.android.physioassistant.models.Doctor;
-import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.backend.retrofit.BackendAPI;
+import uom.android.physioassistant.models.appointment.Appointment;
+import uom.android.physioassistant.models.appointment.AppointmentStatus;
+import uom.android.physioassistant.models.users.doctor.Doctor;
+import uom.android.physioassistant.models.users.patient.Patient;
 import uom.android.physioassistant.models.PhysioAction;
 
 public class DataManager {
 
-    private RetrofitService retrofitService;
+    private BackendAPI backendAPI;
     private PatientApi patientApi;
     private DoctorApi doctorApi;
     private AppointmentApi appointmentApi;
     private PhysioActionApi physioActionApi;
 
     public DataManager() {
-        retrofitService = new RetrofitService();
-        patientApi = retrofitService.getRetrofit().create(PatientApi.class);
-        doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
-        appointmentApi = retrofitService.getRetrofit().create(AppointmentApi.class);
-        physioActionApi = retrofitService.getRetrofit().create(PhysioActionApi.class);
-        doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
+        backendAPI = new BackendAPI();
+        patientApi = backendAPI.getRetrofit().create(PatientApi.class);
+        doctorApi = backendAPI.getRetrofit().create(DoctorApi.class);
+        appointmentApi = backendAPI.getRetrofit().create(AppointmentApi.class);
+        physioActionApi = backendAPI.getRetrofit().create(PhysioActionApi.class);
+        doctorApi = backendAPI.getRetrofit().create(DoctorApi.class);
 
     }
 

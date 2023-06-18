@@ -2,7 +2,7 @@ package uom.android.physioassistant.backend.events;
 
 import java.util.List;
 
-import uom.android.physioassistant.models.Doctor;
+import uom.android.physioassistant.models.users.doctor.Doctor;
 
 public class DoctorsLoadedEvent {
 

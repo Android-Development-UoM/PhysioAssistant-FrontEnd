@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.ui.DropDownClickListener;
-import uom.android.physioassistant.models.Doctor;
+import uom.android.physioassistant.listeners.DropDownClickListener;
+import uom.android.physioassistant.models.users.doctor.Doctor;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> implements IDropDownAdapter {
 

@@ -7,13 +7,13 @@ To connect the Android app to the Spring Boot REST API, follow these steps:
 The `RetrofitService` is used to access the backend API. To use it, add the following attribute to the activity:
 
 ```
-private RetrofitService retrofitService;
+private RetrofitService backendAPI;
 ```
 
 Then, create an instance of the `RetrofitService` and assign it to the attribute:
 
 ```
-this.retrofitService = new RetrofitService();
+this.backendAPI = new RetrofitService();
 ```
 
 ## Step 2: Use the API Interfaces
@@ -30,7 +30,7 @@ this.retrofitService = new RetrofitService();
 3. Initialize the API interface using the `RetrofitService`. For example:
 
     ```python
-    this.doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
+    this.doctorApi = backendAPI.getRetrofit().create(DoctorApi.class);
     ```
 
 
@@ -56,7 +56,7 @@ this.retrofitService = new RetrofitService();
 3. Initialize the new API interface using the `RetrofitService`. For example:
 
     ```python
-    this.doctorApi = retrofitService.getRetrofit().create(DoctorApi.class);
+    this.doctorApi = backendAPI.getRetrofit().create(DoctorApi.class);
     ```
 
    > Note: Make sure to use the correct class name for the new API interface.

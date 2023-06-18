@@ -1,9 +1,8 @@
 package uom.android.physioassistant.backend.events;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.models.users.patient.Patient;
 
 public class PatientsLoadedEvent {
 

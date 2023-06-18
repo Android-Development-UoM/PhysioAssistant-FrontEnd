@@ -21,8 +21,8 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.AppointmentStatus;
+import uom.android.physioassistant.models.appointment.Appointment;
+import uom.android.physioassistant.models.appointment.AppointmentStatus;
 
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.ViewHolder> {
 

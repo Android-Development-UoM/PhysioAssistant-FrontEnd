@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import pl.droidsonroids.gif.GifImageView;
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,11 +26,9 @@ import uom.android.physioassistant.activities.patient.PatientActivity;
 import uom.android.physioassistant.backend.api.AuthenticationApi;
 import uom.android.physioassistant.backend.requests.LoginRequest;
 import uom.android.physioassistant.backend.responses.LoginResponse;
-import uom.android.physioassistant.backend.retrofit.RetrofitService;
-import uom.android.physioassistant.models.Doctor;
-import uom.android.physioassistant.models.PhysioAction;
-import uom.android.physioassistant.models.User;
-import uom.android.physioassistant.models.UserType;
+import uom.android.physioassistant.backend.retrofit.BackendAPI;
+import uom.android.physioassistant.models.users.User;
+import uom.android.physioassistant.models.users.UserType;
 
 /**
  * This activity is responsible for the user login screen.
@@ -44,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView errorMsg;
     Button loginBtn;
     Spinner selectUserType;
-    RetrofitService retrofitService;
+    BackendAPI backendAPI;
     AuthenticationApi authenticationApi;
     GifImageView loadingGif;
     String selectedUser;
@@ -58,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         initComponents();
 
         // Initialize RetrofitService and AuthenticationApi for making API calls
-        this.retrofitService = new RetrofitService();
-        this.authenticationApi = retrofitService.getRetrofit().create(AuthenticationApi.class);
+        this.backendAPI = new BackendAPI();
+        this.authenticationApi = backendAPI.getRetrofit().create(AuthenticationApi.class);
 
         Intent intent = getIntent();
 

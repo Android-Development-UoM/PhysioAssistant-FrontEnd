@@ -1,6 +1,6 @@
 package uom.android.physioassistant.adapters;
 
-import uom.android.physioassistant.ui.DropDownClickListener;
+import uom.android.physioassistant.listeners.DropDownClickListener;
 
 public interface IDropDownAdapter {
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.patient.appointment.AppointmentOptionsFragment">
+    tools:context=".ui.fragments.patient.appointment.AppointmentOptionsFragment">
 
 
     <TextView
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.13" />
 
 
-    <uom.android.physioassistant.ui.DropDown
+    <uom.android.physioassistant.ui.dropdown.DropDown
         android:id="@+id/doctorDropdown"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/choosePatientText"
         app:layout_constraintVertical_bias="0.24000001" />
 
-    <uom.android.physioassistant.ui.DropDown
+    <uom.android.physioassistant.ui.dropdown.DropDown
         android:id="@+id/serviceDropdown"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

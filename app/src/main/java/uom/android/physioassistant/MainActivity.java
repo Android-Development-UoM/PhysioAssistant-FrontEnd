@@ -1,43 +1,49 @@
 package uom.android.physioassistant;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
+import org.greenrobot.eventbus.EventBus;
 
 import uom.android.physioassistant.activities.login.LoginActivity;
 
+/* This is the Splash Activity */
 public class MainActivity extends AppCompatActivity {
-    private Button adminLoginBtn;
-    private Button doctorLoginBtn;
-    private Button patientLogintBtn;
+
+    private static int SPLASH_TIMEOUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.hideHeaderBar();
+        setContentView(R.layout.activity_splash);
 
-        // Initialize button views
-        adminLoginBtn = findViewById(R.id.admin_btn);
-        doctorLoginBtn = findViewById(R.id.doctor_btn);
-        patientLogintBtn = findViewById(R.id.patient_btn);
+        AndroidThreeTen.init(this);
+        EventBus.builder().installDefaultEventBus();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initActivity();
+            }
+        }, SPLASH_TIMEOUT);
+
     }
 
-    public void handleClick(View view) {
-        Button clickedButton = (Button) view;
-        if (clickedButton == this.adminLoginBtn) {
-            Log.i("Main", "Admin Login button clicked.");
-            Intent adminLoginIntent = new Intent(this, LoginActivity.class);
-            startActivity(adminLoginIntent);
+    private void hideHeaderBar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
         }
-        if (clickedButton == this.doctorLoginBtn) {
-            Log.i("Main", "Doctor Login");
-        }
-        if (clickedButton == this.patientLogintBtn) {
-            Log.i("Main", "Patient Login");
-        }
+    }
+
+    private void initActivity() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

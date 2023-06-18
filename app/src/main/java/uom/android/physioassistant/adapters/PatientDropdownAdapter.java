@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.models.Patient;
-import uom.android.physioassistant.ui.DropDownClickListener;
+import uom.android.physioassistant.models.users.patient.Patient;
+import uom.android.physioassistant.listeners.DropDownClickListener;
 
 public class PatientDropdownAdapter extends RecyclerView.Adapter<PatientDropdownAdapter.ViewHolder> implements IDropDownAdapter {
 

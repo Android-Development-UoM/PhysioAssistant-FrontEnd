@@ -11,8 +11,8 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import uom.android.physioassistant.backend.requests.AppointmentRequest;
-import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.AppointmentStatus;
+import uom.android.physioassistant.models.appointment.Appointment;
+import uom.android.physioassistant.models.appointment.AppointmentStatus;
 
 public interface AppointmentApi {
 

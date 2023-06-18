@@ -1,6 +1,6 @@
 package uom.android.physioassistant.backend.responses;
 
-import uom.android.physioassistant.models.User;
+import uom.android.physioassistant.models.users.User;
 public class LoginResponse {
     private User user;
     private String errorMessage;

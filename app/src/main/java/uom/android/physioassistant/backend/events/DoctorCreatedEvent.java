@@ -1,6 +1,6 @@
 package uom.android.physioassistant.backend.events;
 
-import uom.android.physioassistant.models.Doctor;
+import uom.android.physioassistant.models.users.doctor.Doctor;
 
 public class DoctorCreatedEvent {
 

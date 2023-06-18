@@ -1,7 +1,6 @@
 package uom.android.physioassistant.backend.events;
 
-import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.AppointmentStatus;
+import uom.android.physioassistant.models.appointment.Appointment;
 
 public class AppointmentCreatedEvent {
 
