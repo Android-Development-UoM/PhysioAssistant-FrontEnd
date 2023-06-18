@@ -4,7 +4,6 @@
 - [File Structure](#file-structure)
 - [Activities](#activities)
   - [LoginActivity](#loginactivity)
-  - [MainActivity](#mainactivity)
   - [SplashActivity](#splashactivity)
   - [AdminActivity](#adminactivity)
   - [DoctorActivity](#doctoractivity)
