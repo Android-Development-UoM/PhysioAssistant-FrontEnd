@@ -19,11 +19,15 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
 import uom.android.physioassistant.activities.OnBackPressedListener;
 import uom.android.physioassistant.backend.datamanager.DataManager;
+import uom.android.physioassistant.backend.events.DoctorCreatedEvent;
 import uom.android.physioassistant.backend.events.PatientCreatedEvent;
+import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
 import uom.android.physioassistant.backend.requests.CreatePatientRequest;
 import uom.android.physioassistant.backend.responses.ErrorResponse;
 import uom.android.physioassistant.models.Doctor;
@@ -50,6 +54,7 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
     private EditText amkaText;
     private TextView nameWarning,addressWarning,amkaWarning;
     private MaterialButton createButton;
+    private Doctor doctor;
     private View view;
 
     public CreatePatientFragment() {
@@ -91,6 +96,8 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
         DoctorActivity doctorActivity = (DoctorActivity) getActivity();
         doctorActivity.getNavBar().setVisibility(View.GONE);
 
+        doctor = doctorActivity.getDoctor();
+
         view = inflater.inflate(R.layout.fragment_create_patient, container, false);
 
         initViews(view);
@@ -118,21 +125,16 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
         }
         else{
             createSuccessDialogs(view);
+
         }
+        emptyEditTexts();
         returnToPatientsFragment();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onPatientFailedToCreate(ErrorResponse response){
-        String errorMessage = response.getErrorMessage();
-        amkaWarning.setVisibility(View.VISIBLE);
-        amkaWarning.setText(errorMessage);
-    }
+
 
     private void initViews(View view) {
 
-        DoctorActivity doctorActivity = (DoctorActivity) getActivity();
-        Doctor doctor = doctorActivity.getDoctor();
 
 
         nameText = view.findViewById(R.id.nameText);
@@ -148,13 +150,29 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
             @Override
             public void onClick(View v) {
                 if(isAllFilled()){
-                    DataManager dataManager = new DataManager();
-                    dataManager.createPatient(doctor.getAfm(),createPatientRequest());
+                    if(!patientExists(createPatientRequest())){
+                        DataManager dataManager = new DataManager();
+                        dataManager.createPatient(doctor.getAfm(),createPatientRequest());
+                    }
                 }
             }
         });
 
     }
+
+    private boolean patientExists(CreatePatientRequest patientRequest) {
+
+        for(Patient patient: doctor.getPatients()){
+            if(patient.getAmka().equals(patientRequest.getAmka())){
+                amkaWarning.setVisibility(View.VISIBLE);
+                amkaWarning.setText("*Ο ασθενής με ΑΜΚΑ "+patient.getAmka()+" υπάρχει ήδη");
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     private CreatePatientRequest createPatientRequest(){
         String amka = amkaText.getText().toString();
@@ -162,6 +180,12 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
         String address = addressText.getText().toString();
 
         return new CreatePatientRequest(amka,name,address);
+    }
+
+    private void emptyEditTexts(){
+        amkaText.setText("");
+        nameText.setText("");
+        addressText.setText("");
     }
 
     private boolean isAllFilled(){
@@ -222,6 +246,8 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
         dialog.show();
     }
 
+
+
     private void returnToPatientsFragment() {
         DoctorActivity doctorActivity = (DoctorActivity) getActivity();
         doctorActivity.replaceFragment(FragmentType.DOCTOR_PATIENTS_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
@@ -230,6 +256,8 @@ public class CreatePatientFragment extends Fragment implements OnBackPressedList
 
     @Override
     public void onBackPressed(FragmentNavigation navigation) {
+
+        emptyEditTexts();
         DoctorActivity doctorActivity = (DoctorActivity) navigation;
         doctorActivity.replaceFragment(FragmentType.DOCTOR_PATIENTS_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
         doctorActivity.getNavBar().setVisibility(View.VISIBLE);

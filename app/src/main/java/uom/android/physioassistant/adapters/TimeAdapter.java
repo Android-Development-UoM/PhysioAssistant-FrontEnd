@@ -1,4 +1,4 @@
-package uom.android.physioassistant.activities.adapters;
+package uom.android.physioassistant.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

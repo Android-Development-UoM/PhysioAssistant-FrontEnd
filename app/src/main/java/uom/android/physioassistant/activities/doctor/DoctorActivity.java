@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import com.jakewharton.threetenabp.AndroidThreeTen;
+import android.os.Handler;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.threeten.bp.LocalTime;
 
 import java.util.ArrayList;
 
@@ -21,9 +23,12 @@ import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
 import uom.android.physioassistant.backend.events.DoctorLoadedEvent;
 import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
+import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
 import uom.android.physioassistant.models.Appointment;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.Patient;
+import uom.android.physioassistant.models.PhysioAction;
+import uom.android.physioassistant.models.User;
 import uom.android.physioassistant.ui.DoctorNavBar;
 import uom.android.physioassistant.ui.FragmentType;
 
@@ -31,17 +36,25 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
 
     private DoctorNavBar navBar;
     private Doctor doctor;
+    private ArrayList<PhysioAction> physioActions;
+    private boolean isDoctorLoaded,isAppointmentsLoaded,isPatientsLoaded,isPhysioActionsLoaded,initActivity;
+    private Handler handler;
+    private Runnable eventRunnable;
+    private TextView notificationsCount;
 
-    private boolean isDoctorLoaded,isAppointmentsLoaded,initActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor);
 
+        Intent intent =  getIntent();
+        User user = (User) intent.getSerializableExtra("user");
 
         DataManager dataManager = new DataManager();
-        dataManager.loadDoctorByUsername("Doctor1");
+        dataManager.loadDoctorByUsername(user.getUsername());
+
+
 
     }
 
@@ -59,12 +72,13 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDoctorLoaded(DoctorLoadedEvent event){
-        doctor = event.getDoctor();
-        isDoctorLoaded = true;
-        DataManager dataManager = new DataManager();
-        dataManager.loadAppointmentsByDoctorId(doctor.getAfm());
-        System.out.println(doctor);
-        checkIfAllDataLoaded();
+        if(!isDoctorLoaded){
+            doctor = event.getDoctor();
+            isDoctorLoaded = true;
+            DataManager dataManager = new DataManager();
+            dataManager.loadAppointmentsByDoctorId(doctor.getAfm());
+            checkIfAllDataLoaded();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -77,12 +91,32 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
             dataManager.loadAllPatientByDoctorId(doctor.getAfm());
             checkIfAllDataLoaded();
         }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPatientsLoaded(PatientsLoadedEvent event){
+        if(!isPatientsLoaded){
+            doctor.setPatients((ArrayList<Patient>) event.getPatients());
+            isPatientsLoaded = true;
+            DataManager dataManager = new DataManager();
+            dataManager.loadPhysioActions();
+            checkIfAllDataLoaded();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPhysioActionsLoaded(PhysioActionsLoadedEvent event){
+        if(!isPhysioActionsLoaded){
+            physioActions = ((ArrayList<PhysioAction>) event.getPhysioActions());
+            isPhysioActionsLoaded = true;
+            checkIfAllDataLoaded();
+        }
     }
 
 
-
     private void checkIfAllDataLoaded() {
-        if (isDoctorLoaded  && isAppointmentsLoaded) {
+        if (isDoctorLoaded  && isAppointmentsLoaded && isPatientsLoaded && isPhysioActionsLoaded) {
             if(!initActivity){
                 initActivity=true;
                 initActivity();
@@ -95,6 +129,8 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
         navBar = findViewById(R.id.navBar);
         navBar.setActivity(this);
         navBar.handleClicks();
+        checkNotificationsCount();
+        startSecondUpdate();
     }
 
     @Override
@@ -120,7 +156,33 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
 
     }
 
+    private void startSecondUpdate() {
+        if(handler==null){
+            handler = new Handler();
+        }
+        if(eventRunnable==null){
+            eventRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    checkNotificationsCount();
+                    handler.postDelayed(this,  1000);
+                }
+            };
+        }
 
+        handler.postDelayed(eventRunnable,  1000);
+
+    }
+
+    private void checkNotificationsCount(){
+        if(doctor.getPendingAppointments().size()>0){
+            getNavBar().showNotificationsCount();
+            getNavBar().updateNotificationsCount(String.valueOf(doctor.getPendingAppointments().size()));
+        }
+        else{
+            getNavBar().hideNotificationsCount();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -140,5 +202,9 @@ public class DoctorActivity extends AppCompatActivity implements FragmentNavigat
 
     public Doctor getDoctor() {
         return doctor;
+    }
+
+    public ArrayList<PhysioAction> getPhysioActions() {
+        return physioActions;
     }
 }

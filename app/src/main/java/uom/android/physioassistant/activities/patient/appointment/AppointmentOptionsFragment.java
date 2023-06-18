@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
 import uom.android.physioassistant.activities.OnBackPressedListener;
-import uom.android.physioassistant.activities.adapters.DoctorAdapter;
-import uom.android.physioassistant.activities.adapters.ServiceDropDownAdapterAdapter;
+import uom.android.physioassistant.adapters.DoctorAdapter;
+import uom.android.physioassistant.adapters.ServiceDropDownAdapterAdapter;
 import uom.android.physioassistant.activities.patient.PatientActivity;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.Patient;
@@ -126,7 +126,7 @@ public class AppointmentOptionsFragment extends Fragment implements OnBackPresse
     }
 
     private void initDoctorDropdown(View view){
-        doctorDropDown = view.findViewById(R.id.physioDropdown);
+        doctorDropDown = view.findViewById(R.id.doctorDropdown);
         doctorAdapter = new DoctorAdapter(view.getContext());
         doctorAdapter.setDoctors(doctors);
         doctorDropDown.setAdapter(doctorAdapter);

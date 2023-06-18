@@ -2,6 +2,8 @@ package uom.android.physioassistant.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.textservice.TextInfo;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -9,6 +11,8 @@ import java.util.Stack;
 import uom.android.physioassistant.R;
 
 public class DoctorNavBar extends NavBar{
+
+    private TextView notificationsCount;
     public DoctorNavBar(Context context) {
         super(context);
         init(context);
@@ -41,16 +45,53 @@ public class DoctorNavBar extends NavBar{
         NavButton notificationsButton = findViewById(R.id.notificationsButton);
         notificationsButton.setButtonType(ButtonType.DOCTOR_NOTIFICATIONS);
 
+        TextView homeText = findViewById(R.id.homeNavText);
+        TextView patientText = findViewById(R.id.patientNavText);
+        TextView calendarText = findViewById(R.id.calendarNavText);
+        TextView notificationText = findViewById(R.id.notificationNavText);
+
+        NavItem homeItem = findViewById(R.id.homeLayout);
+        NavItem patientItem = findViewById(R.id.patientsLayout);
+        NavItem calendarItem = findViewById(R.id.calendarLayout);
+        NavItem notificationsItem = findViewById(R.id.notificationLayout);
+
+        homeItem.setNavButton(homeButton);
+        homeItem.setNavText(homeText);
+        homeItem.setPressed();
+
+        patientItem.setNavButton(patientsButton);
+        patientItem.setNavText(patientText);
+
+        calendarItem.setNavButton(calendarButton);
+        calendarItem.setNavText(calendarText);
+
+        notificationsItem.setNavButton(notificationsButton);
+        notificationsItem.setNavText(notificationText);
+        notificationsCount = findViewById(R.id.notificationsCount);
+
         backStack = new Stack<>();
 
-        currentButton = homeButton;
+        currentButton = homeItem;
 
         buttons = new ArrayList<>();
-        buttons.add(homeButton);
-        buttons.add(patientsButton);
-        buttons.add(calendarButton);
-        buttons.add(notificationsButton);
+        buttons.add(homeItem);
+        buttons.add(patientItem);
+        buttons.add(calendarItem);
+        buttons.add(notificationsItem);
 
     }
+
+    public void updateNotificationsCount(String num){
+        notificationsCount.setText(num);
+    }
+    public void hideNotificationsCount(){
+        notificationsCount.setVisibility(INVISIBLE);
+    }
+
+    public void showNotificationsCount(){
+        notificationsCount.setVisibility(VISIBLE);
+    }
+
+
 
 }

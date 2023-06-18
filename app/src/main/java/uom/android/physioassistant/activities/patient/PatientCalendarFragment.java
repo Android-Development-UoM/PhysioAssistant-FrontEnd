@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 import uom.android.physioassistant.activities.FragmentNavigation;
 import uom.android.physioassistant.activities.OnBackPressedListener;
-import uom.android.physioassistant.activities.adapters.AppointmentAdapter;
+import uom.android.physioassistant.adapters.AppointmentAdapter;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.backend.events.AppointmentUpdatedEvent;
@@ -98,47 +98,17 @@ public class PatientCalendarFragment extends Fragment implements OnBackPressedLi
         PatientActivity patientActivity = (PatientActivity) getActivity();
         patientActivity.getNavBar().setVisibility(View.VISIBLE);
         patient = patientActivity.getPatient();
+
+        DataManager dataManager = new DataManager();
+        dataManager.loadAppointmentsByPatientId(patient.getAmka());
+
         initViews(view);
 
-        currentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCurrentPressed(view);
-            }
-        });
 
-        historyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setHistoryPressed(view);
-
-            }
-        });
-
-        createAppointmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PatientActivity patientActivity = (PatientActivity) getActivity();
-                patientActivity.replaceFragment(FragmentType.APPOINTMENT_OPTIONS_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
-
-            }
-        });
 
         return view;
     }
 
-    /*@Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        EventBus.getDefault().register(this);
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        EventBus.getDefault().unregister(this);
-    }*/
 
     @Override
     public void onResume() {
@@ -173,7 +143,6 @@ public class PatientCalendarFragment extends Fragment implements OnBackPressedLi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onAppointmentsLoaded(AppointmentsLoadedEvent event){
-        System.out.println("loaded calendar");
         ArrayList<Appointment> appointments = (ArrayList<Appointment>) event.getAppointments();
         patient.setAppointments(appointments);
         appointmentAdapter.setAppointments(patient.getCurrentAppointments());
@@ -217,21 +186,41 @@ public class PatientCalendarFragment extends Fragment implements OnBackPressedLi
         appointmentRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.VERTICAL,false));
         appointmentRecyclerView.setAdapter(appointmentAdapter);
 
-
         setCurrentPressed(view);
+
+        currentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCurrentPressed(view);
+            }
+        });
+
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setHistoryPressed(view);
+
+            }
+        });
+
+        createAppointmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PatientActivity patientActivity = (PatientActivity) getActivity();
+                patientActivity.replaceFragment(FragmentType.APPOINTMENT_OPTIONS_FRAGMENT.getFragment(), R.anim.fade_in,R.anim.fade_out);
+
+            }
+        });
 
     }
 
     private void setHistoryPressed(View view){
 
-        System.out.println("All appointments "+patient.getAppointments());
-        System.out.println("History appointments "+patient.getHistoryAppointments());
         historyButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.white));
         historyButton.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.blue));
 
         currentButton.setTextColor(ContextCompat.getColor(view.getContext(),R.color.blue));
         currentButton.setBackgroundColor(ContextCompat.getColor(view.getContext(),R.color.white));
-
 
         if(patient.getHistoryAppointments().size()>0){
             appointmentAdapter.setCurrent(false);

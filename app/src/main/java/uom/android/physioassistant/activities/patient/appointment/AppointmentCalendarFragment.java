@@ -1,12 +1,13 @@
 package uom.android.physioassistant.activities.patient.appointment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.CalendarView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.google.android.material.button.MaterialButton;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,12 +27,11 @@ import org.threeten.bp.LocalTime;
 import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
 import uom.android.physioassistant.activities.OnBackPressedListener;
-import uom.android.physioassistant.activities.adapters.TimeAdapter;
+import uom.android.physioassistant.adapters.TimeAdapter;
 import uom.android.physioassistant.activities.patient.PatientActivity;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
@@ -63,8 +64,6 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
     private TextView warningText;
     private TextView noTimeText;
     private MaterialButton nextButton;
-    private ArrayList<LocalTime> times;
-    private Random random;
     private Bundle optionsBundle;
     private Doctor doctor;
 
@@ -169,7 +168,6 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
         calendarView = view.findViewById(R.id.calendarView);
 
         nextButton = view.findViewById(R.id.createPatientButton);
-
     }
 
     private void updateViews(){
@@ -177,8 +175,6 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
         timeAdapter.setTimes(doctor.getAvailableTimeSlots(LocalDate.now()));
         recyclerView.setAdapter(timeAdapter);
         checkValidDate(LocalDate.now());
-
-
 
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -189,12 +185,11 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 timeAdapter.setSelectedButtonPos(-1);
-                LocalDate selectedDate  = LocalDate.of(year,month+1,dayOfMonth);
+                LocalDate selectedDate = LocalDate.of(year,month+1,dayOfMonth);
                 timeAdapter.setTimes(doctor.getAvailableTimeSlots(selectedDate));
                 recyclerView.scrollToPosition(0);
                 checkValidDate(selectedDate);
                 dateText.setText(formatDate(selectedDate));
-
             }
         });
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -203,17 +198,27 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
                 if(timeAdapter.getSelectedTime()!=null){
                     PatientActivity patientActivity = (PatientActivity) getActivity();
                     patientActivity.replaceFragment(FragmentType.APPOINTMENT_SUMMARY.getFragment(), R.anim.enter_right_to_left,R.anim.exit_right_to_left,
-                            calendarBundle(optionsBundle,convertToLocalDate(dateText.getText().toString()),timeAdapter.getSelectedTime()));
-
-
+                    calendarBundle(optionsBundle,convertToLocalDate(dateText.getText().toString()),timeAdapter.getSelectedTime()));
                 }
                 else{
-                    Log.e("Error", "Select time" );
+                    showErrorDialog();
                 }
-
             }
         });
+    }
 
+    private void showErrorDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Σφάλμα")
+                .setMessage("Παρακαλώ επιλέξτε ώρα.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.create().show();
     }
 
     public void checkAvailableTimes(LocalDate date){
@@ -257,11 +262,9 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
         Animation slideAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
                 Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 1,
                 Animation.RELATIVE_TO_SELF, 0);
-
         slideAnimation.setDuration(500);
 
         timeLayout.startAnimation(slideAnimation);
-
     }
 
     public Bundle calendarBundle(Bundle optionsBundle,LocalDate date,LocalTime time){
@@ -271,6 +274,7 @@ public class AppointmentCalendarFragment extends Fragment implements OnBackPress
         bundle.putSerializable("time",time);
         return  bundle;
     }
+
 
     @Override
     public void onBackPressed(FragmentNavigation navigation) {

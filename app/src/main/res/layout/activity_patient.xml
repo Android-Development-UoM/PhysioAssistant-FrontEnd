@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:background="?navBarColor"
         android:elevation="10dp"
-        android:padding="10dp">
+        android:padding="5dp">
 
     </uom.android.physioassistant.ui.PatientNavBar>
 

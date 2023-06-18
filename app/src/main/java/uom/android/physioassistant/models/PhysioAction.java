@@ -10,12 +10,14 @@ public class PhysioAction implements Serializable, DropDownItem {
     private String name;
     private String description;
     private double costPerSession;
+    private String imageURL;
 
-    public PhysioAction(String code, String name, String description, double costPerSession) {
+    public PhysioAction(String code, String name, String description, double costPerSession,String imageURL) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.costPerSession = costPerSession;
+        this.imageURL = imageURL;
     }
 
 
@@ -55,6 +57,10 @@ public class PhysioAction implements Serializable, DropDownItem {
     }
     public void setCostPerSession(double costPerSession) {
         this.costPerSession = costPerSession;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 
     @Override

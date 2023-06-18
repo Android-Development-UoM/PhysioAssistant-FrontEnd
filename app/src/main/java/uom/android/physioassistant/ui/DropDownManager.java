@@ -4,8 +4,9 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import uom.android.physioassistant.activities.adapters.IDropDownAdapter;
+import uom.android.physioassistant.adapters.IDropDownAdapter;
 import uom.android.physioassistant.models.Doctor;
+import uom.android.physioassistant.models.Patient;
 import uom.android.physioassistant.models.PhysioAction;
 
 public class DropDownManager {
@@ -13,6 +14,7 @@ public class DropDownManager {
     private ArrayList<DropDown> dropDowns = new ArrayList<>();
     private Doctor selectedDoctor;
     private PhysioAction selectedService;
+    private Patient selectedPatient;
 
     public DropDownManager(){
 
@@ -57,6 +59,9 @@ public class DropDownManager {
         else if(dropDownItem instanceof PhysioAction){
             selectedService = (PhysioAction) dropDownItem;
         }
+        else if(dropDownItem instanceof Patient){
+            selectedPatient = (Patient) dropDownItem;
+         }
     }
     private void resetDropdowns(DropDown dropDown){
         for(DropDown dd:dropDowns){
@@ -87,4 +92,7 @@ public class DropDownManager {
         return selectedService;
     }
 
+    public Patient getSelectedPatient() {
+        return selectedPatient;
+    }
 }

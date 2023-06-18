@@ -1,4 +1,4 @@
-package uom.android.physioassistant.activities.doctor;
+package uom.android.physioassistant.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.models.Appointment;
 import uom.android.physioassistant.models.Patient;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHolder> {

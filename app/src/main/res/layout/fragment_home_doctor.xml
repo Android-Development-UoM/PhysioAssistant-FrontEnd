@@ -67,6 +67,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
 
             <androidx.cardview.widget.CardView
+                android:visibility="visible"
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +75,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/gradient_color"
-                android:visibility="visible"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
@@ -94,35 +94,33 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/doctorName"
+                            android:id="@+id/patientName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Γιώργος Παπαδόπουλος"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_large" />
+
+                        <TextView
+                            android:id="@+id/serviceName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/service_name"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:layout_below="@id/patientName"
+                            android:layout_marginTop="3dp"/>
 
                         <TextView
                             android:id="@+id/cardDateText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/doctorName"
+                            android:layout_below="@id/serviceName"
                             android:layout_marginTop="3dp"
                             android:text="@string/service_date_text"
                             android:textColor="@color/white"
                             android:textSize="@dimen/text_size_medium" />
 
-                        <TextView
-                            android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/doctorName"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_toEndOf="@id/cardDateText"
-                            android:text="@string/address_text"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/text_size_medium" />
 
                     </RelativeLayout>
 
@@ -151,14 +149,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/noAppointmentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/cardview2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5">
@@ -195,6 +192,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
@@ -211,21 +209,37 @@
                     android:background="@drawable/gradient_blue"
                     android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/totalPatientsText"
+                    <RelativeLayout
+                        android:id="@+id/patientHead"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="Σύνολο Ασθενών"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/totalPatientsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@id/profIcon"
+                            android:text="Σύνολο Ασθενών"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <ImageView
+                            android:id="@+id/profIcon"
+                            android:layout_width="@dimen/option_image_size"
+                            android:layout_height="@dimen/option_image_size"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_profile" />
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/totalPatientsText"
+                        android:layout_below="@id/patientHead"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:id="@+id/totalPatients"
@@ -260,6 +274,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
@@ -275,21 +290,38 @@
                     android:background="@drawable/gradient_blue"
                     android:padding="10dp">
 
-                    <TextView
-                        android:id="@+id/totalAppointmentsText"
+                    <RelativeLayout
+                        android:id="@+id/headAppointment"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:text="Σύνολο Ραντεβού"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/totalAppointmentsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@id/calIcon"
+                            android:text="Σύνολο Ραντεβού"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <ImageView
+                            android:id="@+id/calIcon"
+                            android:layout_width="@dimen/option_image_size"
+                            android:layout_height="@dimen/option_image_size"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_calendar" />
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/totalAppointmentsText"
+                        android:layout_below="@id/headAppointment"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp">
+                        android:layout_marginTop="20dp">
 
                         <TextView
                             android:id="@+id/totalAppointments"
@@ -312,6 +344,70 @@
 
 
                     </RelativeLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardview2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_green"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/profitHead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toStartOf="@id/moneyIcon"
+                            android:text="Συνολικά κέρδη αυτόν τον μήνα"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_medium" />
+
+                        <ImageView
+                            android:id="@+id/moneyIcon"
+                            android:layout_width="@dimen/option_image_size"
+                            android:layout_height="@dimen/option_image_size"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:src="@drawable/ic_money" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/profitText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/profitHead"
+                        android:layout_centerHorizontal="true"
+                        android:text="1800$"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold"/>
+
 
                 </RelativeLayout>
 

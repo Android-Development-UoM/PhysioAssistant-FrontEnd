@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.activities.adapters.ServiceAdapter;
+import uom.android.physioassistant.adapters.ServiceAdapter;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.AppointmentUpdatedEvent;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
@@ -115,22 +115,11 @@ public class PatientHomeFragment extends Fragment {
         startMinuteUpdate();
         checkAppointmentDone();
 
-        System.out.println("Appointments "+patient.getAppointments());
 
         return view;
     }
 
-    /*@Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        EventBus.getDefault().register(this);
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        EventBus.getDefault().unregister(this);
-    }*/
 
     @Override
     public void onResume() {

@@ -1,4 +1,4 @@
-package uom.android.physioassistant.activities.adapters;
+package uom.android.physioassistant.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -59,7 +60,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             holder.deleteImage.setVisibility(View.INVISIBLE);
         }
 
-
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
         Glide.with(context).asBitmap().load(imageURL).into(holder.serviceImage);
         holder.serviceName.setText(appointments.get(position).getPhysioAction().getName());
@@ -67,7 +67,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         holder.time.setText(appointments.get(position).getLocalTime().toString());
         holder.address.setText(appointments.get(position).getDoctor().getName());
         holder.statusImage.setImageResource(setStatusImage(appointments.get(position).getStatus()));
-
+        holder.cost.setText(appointments.get(position).getPhysioAction().getCostPerSession()+"$");
         holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -84,7 +84,6 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         });
 
     }
-
     @Override
     public int getItemCount() {
         return appointments.size();
@@ -117,6 +116,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (onItemClickListener != null) {
+                    setDeleteMode(false);
                     onItemClickListener.onItemClick(appointment);
                 }
 
@@ -188,7 +188,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
             address = itemView.findViewById(R.id.address);
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.time);
-            cost = itemView.findViewById(R.id.cost);
+            cost = itemView.findViewById(R.id.price);
             deleteImage = itemView.findViewById(R.id.deleteImage);
         }
     }

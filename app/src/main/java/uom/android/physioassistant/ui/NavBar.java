@@ -13,15 +13,14 @@ import java.util.Stack;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
-import uom.android.physioassistant.activities.doctor.DoctorActivity;
-import uom.android.physioassistant.activities.patient.PatientActivity;
 
 public abstract class NavBar extends RelativeLayout {
 
     protected Activity activity;
-    protected Stack<NavButton> backStack;
-    protected ArrayList<NavButton> buttons;
-    protected NavButton currentButton;
+    protected Stack<NavItem> backStack;
+    protected ArrayList<NavItem> buttons;
+    protected NavItem currentButton;
+
 
     public NavBar(Context context) {
         super(context);
@@ -39,7 +38,7 @@ public abstract class NavBar extends RelativeLayout {
     protected abstract void init(Context context);
 
     public void handleClicks() {
-        for (NavButton button : buttons) {
+        for (NavItem button : buttons) {
             button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -57,7 +56,7 @@ public abstract class NavBar extends RelativeLayout {
 
     public void undo() {
         if (!backStack.isEmpty()) {
-            NavButton prevButton = backStack.pop();
+            NavItem prevButton = backStack.pop();
             transition(prevButton);
         }
         else{
@@ -65,7 +64,7 @@ public abstract class NavBar extends RelativeLayout {
         }
     }
 
-    public void transition(NavButton nextButton) {
+    public void transition(NavItem nextButton) {
 
         resetButtons();
         nextButton.setPressed();
@@ -79,13 +78,13 @@ public abstract class NavBar extends RelativeLayout {
             exitAnimation = R.anim.exit_right_to_left;
         }
 
-        ((FragmentNavigation) activity).replaceFragment(nextButton.getFragment(), enterAnimation, exitAnimation);
+        ((FragmentNavigation) activity).replaceFragment(nextButton.getNavButton().getFragment(), enterAnimation, exitAnimation);
         currentButton = nextButton;
     }
 
     public void transition(Fragment fragment){
-        for(NavButton button:buttons){
-            if(button.getButtonType().getFragment().equals(fragment)){
+        for(NavItem button:buttons){
+            if(button.getNavButton().getButtonType().getFragment().equals(fragment)){
                 backStack.push(currentButton);
                 transition(button);
             }
@@ -93,7 +92,7 @@ public abstract class NavBar extends RelativeLayout {
     }
 
     public void resetButtons() {
-        for (NavButton button : buttons) {
+        for (NavItem button : buttons) {
             button.setIdle();
         }
     }

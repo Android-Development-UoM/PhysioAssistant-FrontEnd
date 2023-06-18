@@ -4,6 +4,7 @@
     <dimen name="text_size_large">25sp</dimen>
     <dimen name="text_size_medium">20sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_nav">10sp</dimen>
     <dimen name="nav_button_size">35dp</dimen>
     <dimen name="service_image_width">250dp</dimen>
     <dimen name="service_image_height">150dp</dimen>
@@ -15,5 +16,7 @@
     <dimen name="dropdown_padding">20dp</dimen>
     <dimen name="calendar_height">320dp</dimen>
     <dimen name="status_image_size">24dp</dimen>
+    <dimen name="notification_count_size">18dp</dimen>
+    <dimen name="notification_count_text">14sp</dimen>
 
 </resources>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import uom.android.physioassistant.models.comparators.AppointmentDescendingComp;
 import uom.android.physioassistant.ui.DropDownItem;
 import uom.android.physioassistant.models.comparators.AppointmentAscendingComp;
 
@@ -73,7 +74,7 @@ public class Doctor extends User implements Serializable,DropDownItem {
 
         ArrayList<Appointment> currentAppointments = new ArrayList<>();
         for(Appointment appointment:appointments){
-            if(appointment.getStatus().equals(AppointmentStatus.ACCEPTED) || appointment.getStatus().equals(AppointmentStatus.PENDING)){
+            if(appointment.getStatus().equals(AppointmentStatus.ACCEPTED)){
                 currentAppointments.add(appointment);
             }
         }
@@ -84,13 +85,46 @@ public class Doctor extends User implements Serializable,DropDownItem {
     public ArrayList<Appointment> getAppointmentsByDate(LocalDate date){
         ArrayList<Appointment> appointmentsByDate = new ArrayList<>();
         for(Appointment appointment:appointments){
-            if(appointment.getLocalDate().equals(date)){
+            if(appointment.getLocalDate().equals(date) && (appointment.getStatus().equals(AppointmentStatus.ACCEPTED)||appointment.getStatus().equals(AppointmentStatus.DONE))){
                 appointmentsByDate.add(appointment);
             }
         }
         Collections.sort(appointmentsByDate,new AppointmentAscendingComp());
         return appointmentsByDate;
     }
+
+    public ArrayList<Appointment> getPendingAppointments(){
+        ArrayList<Appointment> pendingAppointments = new ArrayList<>();
+
+        for(Appointment appointment:appointments){
+            if(appointment.getStatus().equals(AppointmentStatus.PENDING)){
+                pendingAppointments.add(appointment);
+            }
+        }
+        Collections.sort(pendingAppointments,new AppointmentAscendingComp());
+        return pendingAppointments;
+    }
+
+    public ArrayList<Appointment> getCompletedAppointments(){
+        ArrayList<Appointment> doneAppointments = new ArrayList<>();
+        for(Appointment appointment:appointments){
+            if(appointment.getStatus().equals(AppointmentStatus.DONE)){
+                doneAppointments.add(appointment);
+            }
+        }
+        return doneAppointments;
+    }
+
+    public double calculateMonthlyProfit(){
+        double sum=0;
+        for(Appointment appointment:getCompletedAppointments()){
+            if(appointment.getLocalDate().getMonthValue()==LocalDate.now().getMonthValue()){
+                sum+=appointment.getPhysioAction().getCostPerSession();
+            }
+        }
+        return sum;
+    }
+
     public ArrayList<Appointment> getAppointments() {
         return appointments;
     }
@@ -134,5 +168,18 @@ public class Doctor extends User implements Serializable,DropDownItem {
     @Override
     public String getText() {
         return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "afm='" + afm + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", patients=" + patients +
+                ", appointments=" + appointments +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

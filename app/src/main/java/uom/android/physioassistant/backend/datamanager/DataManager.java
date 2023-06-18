@@ -21,13 +21,16 @@ import uom.android.physioassistant.backend.api.PhysioActionApi;
 import uom.android.physioassistant.backend.events.AppointmentCreatedEvent;
 import uom.android.physioassistant.backend.events.AppointmentUpdatedEvent;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
+import uom.android.physioassistant.backend.events.DoctorCreatedEvent;
 import uom.android.physioassistant.backend.events.DoctorLoadedEvent;
 import uom.android.physioassistant.backend.events.DoctorsLoadedEvent;
 import uom.android.physioassistant.backend.events.PatientCreatedEvent;
 import uom.android.physioassistant.backend.events.PatientLoadedEvent;
 import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
+import uom.android.physioassistant.backend.events.PhysioActionCreatedEvent;
 import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
 import uom.android.physioassistant.backend.requests.AppointmentRequest;
+import uom.android.physioassistant.backend.requests.CreateDoctorRequest;
 import uom.android.physioassistant.backend.requests.CreatePatientRequest;
 import uom.android.physioassistant.backend.responses.ErrorResponse;
 import uom.android.physioassistant.backend.retrofit.RetrofitService;
@@ -55,6 +58,23 @@ public class DataManager {
 
     }
 
+
+    public void loadPatients(){
+        patientApi.getPatients().enqueue(new Callback<List<Patient>>() {
+            @Override
+            public void onResponse(Call<List<Patient>> call, Response<List<Patient>> response) {
+                if(response.isSuccessful()){
+                    ArrayList<Patient> patients = (ArrayList<Patient>) response.body();
+                    EventBus.getDefault().post(new PatientsLoadedEvent(patients));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Patient>> call, Throwable t) {
+
+            }
+        });
+    }
 
     public void loadPatientById(String id){
         patientApi.getPatientById(id).enqueue(new Callback<Patient>() {
@@ -132,6 +152,24 @@ public class DataManager {
         });
     }
 
+    public void createDoctor(Doctor doctor){
+        doctorApi.createDoctor(doctor).enqueue(new Callback<Doctor>() {
+            @Override
+            public void onResponse(Call<Doctor> call, Response<Doctor> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("response "+doctor);
+                    EventBus.getDefault().post(new DoctorCreatedEvent(doctor));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Doctor> call, Throwable t) {
+                Log.e("Error", "failed to create doctor"+t);
+            }
+        });
+
+    }
+
     public void createPatient(String doctorId, CreatePatientRequest patientRequest){
         doctorApi.createPatient(doctorId,patientRequest).enqueue(new Callback<Patient>() {
             @Override
@@ -140,9 +178,6 @@ public class DataManager {
                     Patient patient = response.body();
                     System.out.println("response "+patient);
                     EventBus.getDefault().post(new PatientCreatedEvent(patient));
-                } else {
-                    /*printErrorMessage(response.errorBody());*/
-                    EventBus.getDefault().post(new ErrorResponse(parseErrorResponse(response.errorBody())));
                 }
             }
 
@@ -285,26 +320,6 @@ public class DataManager {
         });
     }
 
-
-    /*public void loadPhysioCenters(){
-        physioCenterApi.getAllPhysioCenters().enqueue(new Callback<List<PhysioCenter>>() {
-            @Override
-            public void onResponse(Call<List<PhysioCenter>> call, Response<List<PhysioCenter>> response) {
-                if (response.isSuccessful()) {
-                    List<PhysioCenter> physioCenters = response.body();
-                    EventBus.getDefault().post(new PhysioCentersLoadedEvent(physioCenters));
-                } else {
-                    printErrorMessage(response.errorBody());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PhysioCenter>> call, Throwable t) {
-                Log.e("Error", "failed to load physio centers"+t);
-            }
-        });
-    }*/
-
     public void loadPhysioActions(){
         physioActionApi.getPhysioActions().enqueue(new Callback<List<PhysioAction>>() {
             @Override
@@ -319,7 +334,27 @@ public class DataManager {
 
             @Override
             public void onFailure(Call<List<PhysioAction>> call, Throwable t) {
+                Log.e("Error", "failed to load PhysioActions"+t);
+            }
+        });
+    }
 
+    public void createPhysioAction(PhysioAction physioAction){
+        physioActionApi.createPhysioAction(physioAction).enqueue(new Callback<PhysioAction>() {
+            @Override
+            public void onResponse(Call<PhysioAction> call, Response<PhysioAction> response) {
+                if (response.isSuccessful()) {
+                    PhysioAction createdPhysioAction = response.body();
+                    System.out.println(createdPhysioAction);
+                    EventBus.getDefault().post(new PhysioActionCreatedEvent(createdPhysioAction));
+                } else {
+                    printErrorMessage(response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PhysioAction> call, Throwable t) {
+                Log.e("Error", "failed to create PhysioAction"+t);
             }
         });
     }

@@ -1,12 +1,14 @@
 package uom.android.physioassistant.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import uom.android.physioassistant.models.comparators.AppointmentAscendingComp;
 import uom.android.physioassistant.models.comparators.AppointmentDescendingComp;
+import uom.android.physioassistant.ui.DropDownItem;
 
-public class Patient extends User{
+public class Patient extends User implements Serializable, DropDownItem {
 
     private String amka;
     private String name;
@@ -92,5 +94,10 @@ public class Patient extends User{
                 ", doctors=" + doctors +
                 ", appointments=" + appointments +
                 '}';
+    }
+
+    @Override
+    public String getText() {
+        return this.name;
     }
 }

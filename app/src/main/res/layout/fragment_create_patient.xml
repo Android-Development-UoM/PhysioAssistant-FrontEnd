@@ -10,10 +10,10 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Δημιουργία ασθενή"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/text_size_extra_large"
-        app:layout_constraintBottom_toTopOf="@+id/nameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,20 +34,25 @@
 
     <EditText
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:hint="Όνομα"
+        android:inputType="text"
         android:padding="15dp"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/text_size_medium"
-        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/addressText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.36"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/addressWarning"
@@ -57,27 +62,30 @@
         android:text="*Συμπληρώστε την διεύθυνση"
         android:textColor="@color/error_red"
         android:textSize="@dimen/text_size_small"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/addressText"
-        app:layout_constraintStart_toStartOf="@+id/addressText"
-        android:visibility="invisible"/>
+        app:layout_constraintStart_toStartOf="@+id/addressText" />
+
 
     <EditText
         android:id="@+id/addressText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/border"
         android:ems="10"
         android:hint="Διεύθυνση"
+        android:inputType="text"
         android:padding="15dp"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/text_size_medium"
-        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/amkaText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
-
 
     <TextView
         android:id="@+id/amkaWarning"
@@ -86,21 +94,23 @@
         android:text="*Συμπληρώστε το ΑΜΚΑ"
         android:textColor="@color/error_red"
         android:textSize="@dimen/text_size_small"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/amkaText"
-        app:layout_constraintStart_toStartOf="@+id/amkaText"
-        android:visibility="invisible"/>
+        app:layout_constraintStart_toStartOf="@+id/amkaText" />
 
     <EditText
         android:id="@+id/amkaText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/border"
         android:ems="10"
         android:hint="ΑΜΚΑ"
+        android:inputType="text"
         android:padding="15dp"
         android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/text_size_medium"
-        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/createPatientButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

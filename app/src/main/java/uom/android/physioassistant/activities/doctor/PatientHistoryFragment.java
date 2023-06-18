@@ -3,7 +3,6 @@ package uom.android.physioassistant.activities.doctor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,14 +21,12 @@ import java.util.Collections;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
 import uom.android.physioassistant.activities.OnBackPressedListener;
-import uom.android.physioassistant.activities.adapters.AppointmentAdapter;
+import uom.android.physioassistant.adapters.AppointmentAdapter;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
 import uom.android.physioassistant.models.Appointment;
-import uom.android.physioassistant.models.AppointmentStatus;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.Patient;
-import uom.android.physioassistant.models.comparators.AppointmentAscendingComp;
 import uom.android.physioassistant.models.comparators.AppointmentDescendingComp;
 import uom.android.physioassistant.ui.FragmentType;
 
@@ -100,9 +96,8 @@ public class PatientHistoryFragment extends Fragment implements OnBackPressedLis
         if (bundle != null) {
             patient = (Patient) bundle.getSerializable("patient");
         }
+
         DataManager dataManager = new DataManager();
-        System.out.println("Amka "+patient.getAmka());
-        System.out.println("Afm "+doctor.getAfm());
         dataManager.loadAppointmentsForPatientWithDoctor(patient.getAmka(),doctor.getAfm());
         initViews(view);
 

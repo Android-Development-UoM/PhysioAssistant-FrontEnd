@@ -18,13 +18,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.activities.patient.PatientActivity;
+import uom.android.physioassistant.adapters.PatientAdapter;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.PatientsLoadedEvent;
-import uom.android.physioassistant.models.Appointment;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.Patient;
 import uom.android.physioassistant.ui.FragmentType;
@@ -177,8 +175,6 @@ public class PatientsFragment extends Fragment {
         });
 
     }
-
-
 
 
     private Bundle patientBundle(Patient patient){

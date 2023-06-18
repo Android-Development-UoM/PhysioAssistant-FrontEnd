@@ -18,7 +18,9 @@ import uom.android.physioassistant.activities.OnBackPressedListener;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.backend.events.AppointmentsLoadedEvent;
+import uom.android.physioassistant.backend.events.DoctorsLoadedEvent;
 import uom.android.physioassistant.backend.events.PatientLoadedEvent;
+import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
 import uom.android.physioassistant.models.Appointment;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.Patient;
@@ -36,7 +38,7 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
     private ArrayList<Doctor> doctors;
     public Patient patient;
 
-    private boolean isPatientLoaded,isAppointmentsLoaded,initActivity;
+    private boolean isPatientLoaded,isAppointmentsLoaded,isDoctorsLoaded,isPhysioActionsLoaded,initActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +48,6 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
 
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
-        physioActions = (ArrayList<PhysioAction>) intent.getSerializableExtra("physio_actions");
-        doctors = (ArrayList<Doctor>) intent.getSerializableExtra("doctors");
-        System.out.println("User "+user);
-        System.out.println("Physio Actions "+physioActions);
-        System.out.println("Doctors "+doctors);
 
 
         DataManager dataManager = new DataManager();
@@ -71,11 +68,13 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onPatientLoaded(PatientLoadedEvent event){
-        patient = event.getPatient();
-        isPatientLoaded = true;
-        DataManager dataManager = new DataManager();
-        dataManager.loadAppointmentsByPatientId(patient.getAmka());
-        checkIfAllDataLoaded();
+        if(!isPatientLoaded){
+            patient = event.getPatient();
+            isPatientLoaded = true;
+            DataManager dataManager = new DataManager();
+            dataManager.loadAppointmentsByPatientId(patient.getAmka());
+            checkIfAllDataLoaded();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -84,12 +83,34 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
             ArrayList<Appointment> appointments = (ArrayList<Appointment>) event.getAppointments();
             patient.setAppointments(appointments);
             isAppointmentsLoaded = true;
+            DataManager dataManager = new DataManager();
+            dataManager.loadDoctors();
+            checkIfAllDataLoaded();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDoctorsLoaded(DoctorsLoadedEvent event){
+        if(!isDoctorsLoaded){
+            doctors = (ArrayList<Doctor>) event.getDoctors();
+            isDoctorsLoaded = true;
+            DataManager dataManager = new DataManager();
+            dataManager.loadPhysioActions();
+            checkIfAllDataLoaded();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPhysioActionsLoaded(PhysioActionsLoadedEvent event){
+        if(!isPhysioActionsLoaded){
+            physioActions = (ArrayList<PhysioAction>) event.getPhysioActions();
+            isPhysioActionsLoaded = true;
             checkIfAllDataLoaded();
         }
     }
 
     private void checkIfAllDataLoaded() {
-        if (isPatientLoaded  && isAppointmentsLoaded) {
+        if (isPatientLoaded  && isAppointmentsLoaded && isDoctorsLoaded && isPhysioActionsLoaded) {
             if(!initActivity){
                 initActivity=true;
                 initActivity();

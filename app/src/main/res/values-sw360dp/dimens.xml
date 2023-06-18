@@ -15,4 +15,6 @@
     <dimen name="dropdown_padding">20dp</dimen>
     <dimen name="calendar_height">350dp</dimen>
     <dimen name="status_image_size">24dp</dimen>
+    <dimen name="notification_count_size">20dp</dimen>
+    <dimen name="notification_count_text">14sp</dimen>
 </resources>

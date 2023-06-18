@@ -46,8 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     RetrofitService retrofitService;
     AuthenticationApi authenticationApi;
     String selectedUser;
-    ArrayList<PhysioAction> physioActions;
-    ArrayList<Doctor> doctors;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         this.authenticationApi = retrofitService.getRetrofit().create(AuthenticationApi.class);
 
         Intent intent = getIntent();
-        physioActions = (ArrayList<PhysioAction>) intent.getSerializableExtra("physio_actions");
-        doctors = (ArrayList<Doctor>) intent.getSerializableExtra("doctors");
 
         configureSpinner();
 
@@ -184,8 +181,6 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body().getUser();
                     Intent next_activity = new Intent(LoginActivity.this, activityClass);
                     next_activity.putExtra("user",user);
-                    next_activity.putExtra("physio_actions",physioActions);
-                    next_activity.putExtra("doctors",doctors);
                     startActivity(next_activity);
                 } else {
                     Log.i("Login", "Login Failed");

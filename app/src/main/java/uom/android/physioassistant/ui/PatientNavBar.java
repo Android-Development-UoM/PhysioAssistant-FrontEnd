@@ -2,6 +2,7 @@ package uom.android.physioassistant.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -36,14 +37,25 @@ public class PatientNavBar extends NavBar {
         NavButton calendarButton = findViewById(R.id.calendarButton);
         calendarButton.setButtonType(ButtonType.PATIENT_CALENDAR);
 
+        TextView homeText = findViewById(R.id.homeNavText);
+        TextView calendarText = findViewById(R.id.calendarNavText);
+
+        NavItem homeItem = findViewById(R.id.homeLayout);
+        NavItem calendarItem = findViewById(R.id.calendarLayout);
+
+        homeItem.setNavButton(homeButton);
+        homeItem.setNavText(homeText);
+
+        calendarItem.setNavButton(calendarButton);
+        calendarItem.setNavText(calendarText);
 
         backStack = new Stack<>();
 
-        currentButton = homeButton;
+        currentButton = homeItem;
 
         buttons = new ArrayList<>();
-        buttons.add(homeButton);
-        buttons.add(calendarButton);
+        buttons.add(homeItem);
+        buttons.add(calendarItem);
 
     }
 
