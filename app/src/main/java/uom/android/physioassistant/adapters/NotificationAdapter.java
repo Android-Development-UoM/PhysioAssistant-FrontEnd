@@ -3,16 +3,12 @@ package uom.android.physioassistant.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.TypedArray;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
@@ -20,7 +16,6 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
-import uom.android.physioassistant.activities.doctor.NotificationsFragment;
 import uom.android.physioassistant.models.Appointment;
 import uom.android.physioassistant.models.AppointmentStatus;
 
@@ -42,7 +37,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @NonNull
     @Override
     public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ui_notification_item,parent,false);
         return new NotificationAdapter.ViewHolder(view);
     }
 

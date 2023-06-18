@@ -23,7 +23,7 @@ public class PatientDropdownAdapter extends RecyclerView.Adapter<PatientDropdown
     @NonNull
     @Override
     public PatientDropdownAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ui_patient_item,parent,false);
         return new PatientDropdownAdapter.ViewHolder(view);
     }
 

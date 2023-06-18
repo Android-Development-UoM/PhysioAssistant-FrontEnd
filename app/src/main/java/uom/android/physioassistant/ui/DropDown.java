@@ -40,7 +40,7 @@ public class DropDown extends RelativeLayout {
 
     private void init(Context context, AttributeSet attrs) {
 
-        inflate(context, R.layout.dropdown_layout, this);
+        inflate(context, R.layout.layout_dropdown, this);
 
         optionImage = findViewById(R.id.optionImage);
         optionText  = findViewById(R.id.optionName);

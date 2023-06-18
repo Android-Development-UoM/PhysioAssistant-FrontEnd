@@ -28,7 +28,7 @@ public class PatientNavBar extends NavBar {
 
     protected void init(Context context){
 
-        inflate(context,R.layout.patient_nav_bar_layout,this);
+        inflate(context,R.layout.layout_nav_bar_patient,this);
 
         NavButton homeButton = findViewById(R.id.homeButton);
         homeButton.setButtonType(ButtonType.PATIENT_HOME);

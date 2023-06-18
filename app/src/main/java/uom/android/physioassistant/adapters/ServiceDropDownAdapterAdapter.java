@@ -29,7 +29,7 @@ public class ServiceDropDownAdapterAdapter extends RecyclerView.Adapter<ServiceD
     @NonNull
     @Override
     public ServiceDropDownAdapterAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.service_dropdown_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ui_service_dropdown_item, parent, false);
         return new ViewHolder(view);
     }
 

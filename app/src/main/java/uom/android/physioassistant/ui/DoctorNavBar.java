@@ -2,7 +2,6 @@ package uom.android.physioassistant.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.textservice.TextInfo;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class DoctorNavBar extends NavBar{
 
     protected void init(Context context){
 
-        inflate(context, R.layout.doctor_nav_bar_layout,this);
+        inflate(context, R.layout.layout_nav_bar_doctor,this);
 
         NavButton homeButton = findViewById(R.id.homeButton);
         homeButton.setButtonType(ButtonType.DOCTOR_HOME);

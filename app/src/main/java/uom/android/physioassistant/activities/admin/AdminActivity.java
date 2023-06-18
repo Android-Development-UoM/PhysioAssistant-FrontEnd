@@ -1,17 +1,13 @@
 package uom.android.physioassistant.activities.admin;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -24,18 +20,14 @@ import java.util.Stack;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.activities.FragmentNavigation;
-import uom.android.physioassistant.activities.OnBackPressedListener;
 import uom.android.physioassistant.backend.datamanager.DataManager;
 import uom.android.physioassistant.backend.events.DoctorsLoadedEvent;
 import uom.android.physioassistant.backend.events.PhysioActionsLoadedEvent;
 import uom.android.physioassistant.models.Doctor;
 import uom.android.physioassistant.models.PhysioAction;
 import uom.android.physioassistant.ui.FragmentType;
-import uom.android.physioassistant.ui.NavButton;
 
 public class AdminActivity extends AppCompatActivity implements FragmentNavigation {
-
-
     private ArrayList<Doctor> doctors;
     private ArrayList<PhysioAction> physioActions;
     private boolean isDoctorsLoaded,isPhysioActionsLoaded;
@@ -47,13 +39,10 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-
         DataManager dataManager = new DataManager();
         dataManager.loadDoctors();
 
         initViews();
-
-
     }
 
     private void initViews(){
@@ -118,8 +107,6 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
         }
     }
 
-
-
     @Override
     public void replaceFragment(Fragment fragment, int enterAnimation, int exitAnimation) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().
@@ -156,17 +143,14 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
 
     @Override
     public void onBackPressed() {
-
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         int backStackEntryCount = fragmentManager.getBackStackEntryCount();
         System.out.println(backStackEntryCount);
-        if(backStackEntryCount==1){
+
+        if(backStackEntryCount==1)
             moveTaskToBack(true);
-        }
-        else{
+        else
             fragmentManager.popBackStack();
-        }
     }
 
     public ArrayList<Doctor> getDoctors() {
