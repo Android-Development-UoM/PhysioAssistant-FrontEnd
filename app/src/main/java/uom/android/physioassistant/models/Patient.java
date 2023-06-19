@@ -48,6 +48,17 @@ public class Patient extends User implements Serializable, DropDownItem {
         return historyAppointments;
     }
 
+    public ArrayList<Appointment> getAcceptedAppointments(){
+        ArrayList<Appointment> acceptedAppointments = new ArrayList<>();
+        for(Appointment appointment:appointments){
+            if(appointment.getStatus().equals(AppointmentStatus.ACCEPTED)){
+                acceptedAppointments.add(appointment);
+            }
+        }
+        Collections.sort(acceptedAppointments,new AppointmentAscendingComp());
+        return acceptedAppointments;
+    }
+
     public void setAppointments(ArrayList<Appointment> appointments) {
         this.appointments = appointments;
     }

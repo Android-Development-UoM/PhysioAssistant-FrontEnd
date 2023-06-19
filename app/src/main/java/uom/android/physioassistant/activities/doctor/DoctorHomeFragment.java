@@ -141,7 +141,7 @@ public class DoctorHomeFragment extends Fragment {
     public void onAppointmentStatusUpdated(AppointmentUpdatedEvent event) {
         if (event.isSuccess()) {
             DataManager dataManager = new DataManager();
-            dataManager.loadAppointmentsByPatientId(doctor.getAfm());
+            dataManager.loadAppointmentsByDoctorId(doctor.getAfm());
 
         } else {
             Log.e("Error", "Failed to update appointment status");
@@ -289,8 +289,8 @@ public class DoctorHomeFragment extends Fragment {
             eventRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    DataManager dataManager = new DataManager();
-                    dataManager.loadAppointmentsByDoctorId(doctor.getAfm());
+                    /*DataManager dataManager = new DataManager();
+                    dataManager.loadAppointmentsByDoctorId(doctor.getAfm());*/
                     LocalTime currentTime = LocalTime.now();
                     int minuteDifference = currentTime.getMinute()-previousTime.getMinute();
                     if(minuteDifference==1 || minuteDifference==-59){

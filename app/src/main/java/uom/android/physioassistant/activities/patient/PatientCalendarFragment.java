@@ -161,11 +161,21 @@ public class PatientCalendarFragment extends Fragment implements OnBackPressedLi
 
         for(Appointment appointment: patient.getCurrentAppointments()){
             if(localDate.isAfter(appointment.getLocalDate())){
-                dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DONE);
+                if(appointment.getStatus().equals(AppointmentStatus.ACCEPTED)){
+                    dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DONE);
+                }
+                else if(appointment.getStatus().equals(AppointmentStatus.PENDING)){
+                    dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DECLINED);
+                }
             }
             else if(localDate.equals(appointment.getLocalDate())){
                 if(localTime.isAfter(appointment.getLocalTime())){
-                    dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DONE);
+                    if(appointment.getStatus().equals(AppointmentStatus.ACCEPTED)){
+                        dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DONE);
+                    }
+                    else if(appointment.getStatus().equals(AppointmentStatus.PENDING)){
+                        dataManager.updateAppointmentStatus(appointment.getId(),AppointmentStatus.DECLINED);
+                    }
                 }
             }
         }

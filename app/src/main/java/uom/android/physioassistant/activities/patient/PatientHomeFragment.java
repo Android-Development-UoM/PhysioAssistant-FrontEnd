@@ -164,8 +164,8 @@ public class PatientHomeFragment extends Fragment {
         LocalDate localDate = dateTime.toLocalDate();
 
         DataManager dataManager = new DataManager();
-        if(patient.getCurrentAppointments().size()>0){
-            for(Appointment appointment: patient.getCurrentAppointments()){
+        if(patient.getAcceptedAppointments().size()>0){
+            for(Appointment appointment: patient.getAcceptedAppointments()){
                 if(localDate.isAfter(appointment.getLocalDate())){
                     dataManager.updateAppointmentStatus(appointment.getId(), AppointmentStatus.DONE);
                 }
@@ -236,8 +236,8 @@ public class PatientHomeFragment extends Fragment {
     private void updateNextAppointmentCard(){
         PatientActivity patientActivity = (PatientActivity) getActivity();
 
-        if(patient.getCurrentAppointments().size()>0) {
-            Appointment nextAppointment = patient.getCurrentAppointments().get(0);
+        if(patient.getAcceptedAppointments().size()>0) {
+            Appointment nextAppointment = patient.getAcceptedAppointments().get(0);
             cardView.setVisibility(View.VISIBLE);
             noAppointmentLayout.setVisibility(View.INVISIBLE);
 
@@ -296,6 +296,7 @@ public class PatientHomeFragment extends Fragment {
                     int minuteDifference = currentTime.getMinute()-previousTime.getMinute();
                     if(minuteDifference==1 || minuteDifference==-59){
                         previousTime = currentTime;
+                        checkAppointmentDone();
                         updateNextAppointmentCard();
                     }
 

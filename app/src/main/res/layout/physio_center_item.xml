@@ -17,53 +17,41 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/doctorImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background" />
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/doctorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/doctorImage"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
+            android:text="Physio Center 1"
+            android:layout_centerHorizontal="true"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/text_size_medium"
+            android:layout_marginLeft="10dp" />
+
+        <RelativeLayout
+            android:layout_centerHorizontal="true"
+            android:id="@+id/addressLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/doctorName"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/locationImage"
+                android:layout_width="@dimen/location_image_size"
+                android:layout_height="@dimen/location_image_size"
+                android:src="@drawable/ic_location"/>
+
+
             <TextView
-                android:id="@+id/doctorName"
+                android:id="@+id/doctorAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Physio Center 1"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/text_size_medium"
-                android:layout_marginLeft="10dp" />
-
-            <RelativeLayout
-                android:id="@+id/addressLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/doctorName"
-                android:layout_marginLeft="10dp">
-
-                <ImageView
-                    android:id="@+id/locationImage"
-                    android:layout_width="@dimen/location_image_size"
-                    android:layout_height="@dimen/location_image_size"
-                    android:src="@drawable/ic_location"/>
-
-
-                <TextView
-                    android:id="@+id/doctorAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Θεσσαλονίκη, 3"
-                    android:textSize="@dimen/text_size_small"
-                    android:textColor="?android:textColorSecondary"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toEndOf="@id/locationImage"/>
-
-            </RelativeLayout>
+                android:text="Θεσσαλονίκη, 3"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="?android:textColorSecondary"
+                android:layout_marginLeft="10dp"
+                android:layout_toEndOf="@id/locationImage"/>
 
 
         </RelativeLayout>

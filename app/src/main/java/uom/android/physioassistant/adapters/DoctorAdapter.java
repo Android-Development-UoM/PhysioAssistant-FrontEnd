@@ -39,9 +39,6 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull DoctorAdapter.ViewHolder holder, int position) {
 
-        String imageURL = "https://ergonphysio.gr/wp-content/uploads/2021/01/ergon-physio-social-favicon.jpg";
-        Glide.with(context).asBitmap().load(imageURL).into(holder.image);
-
         holder.name.setText(doctors.get(position).getName());
         holder.address.setText(doctors.get(position).getAddress());
         holder.card.setOnClickListener(new View.OnClickListener() {
@@ -72,14 +69,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         CardView card;
         TextView name;
         TextView address;
-        ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.doctorName);
             address = itemView.findViewById(R.id.doctorAddress);
-            image = itemView.findViewById(R.id.doctorImage);
             card = itemView.findViewById(R.id.parent);
 
         }

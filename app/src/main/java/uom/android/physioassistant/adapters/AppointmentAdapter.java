@@ -61,7 +61,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         }
 
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
-        Glide.with(context).asBitmap().load(imageURL).into(holder.serviceImage);
+        Glide.with(context).asBitmap().load(appointments.get(position).getPhysioAction().getImageURL()).error(R.drawable.ic_failed_to_load_image).into(holder.serviceImage);
         holder.serviceName.setText(appointments.get(position).getPhysioAction().getName());
         holder.date.setText(formatDate(appointments.get(position).getLocalDate()));
         holder.time.setText(appointments.get(position).getLocalTime().toString());

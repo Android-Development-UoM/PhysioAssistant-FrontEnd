@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import uom.android.physioassistant.R;
 import uom.android.physioassistant.models.Appointment;
+import uom.android.physioassistant.models.AppointmentStatus;
 
 public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppointmentAdapter.ViewHolder> {
 
@@ -49,7 +50,7 @@ public class DoctorAppointmentAdapter extends RecyclerView.Adapter<DoctorAppoint
         holder.serviceName.setText(appointments.get(position).getPhysioAction().getName());
         holder.time.setText(appointments.get(position).getTimeRange());
 
-        if (isDeleteMode) {
+        if (isDeleteMode && appointments.get(position).getStatus().equals(AppointmentStatus.ACCEPTED)) {
             holder.deleteImage.setVisibility(View.VISIBLE);
             handleDeleteButton(holder.deleteImage,appointments.get(position));
         }
