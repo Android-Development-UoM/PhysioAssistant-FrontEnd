@@ -138,10 +138,11 @@
                             android:id="@+id/daysLeft"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@color/white"
                             android:padding="10dp"
                             android:text="@string/remaining_days_text"
-                            android:textSize="@dimen/text_size_small"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/colorPrimaryVariant"
+                            android:textSize="@dimen/text_size_small" />
 
                     </androidx.cardview.widget.CardView>
 

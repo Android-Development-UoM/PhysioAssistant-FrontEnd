@@ -7,7 +7,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BackendAPI {
     private Retrofit retrofit;
-    private static String API_URL = "http://192.168.71.125:8080";
+
+    // API IP address | CHANGE THIS TO YOUR IP ADDRESS
+    private static String API_IP = "192.168.2.30";
+
+    // API Port | CHANGE THIS TO YOUR PORT
+    private static String API_PORT = "8080";
+
+    private static String API_URL = "http://" + API_IP + ":" + API_PORT + "/";
 
     public BackendAPI() {
         init();
