@@ -100,7 +100,15 @@ public class ServiceFragment extends Fragment implements OnBackPressedListener {
 
         serviceImage = view.findViewById(R.id.serviceImage);
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
-        Glide.with(view.getContext()).asBitmap().load(physioAction.getImageURL()).error(R.drawable.ic_failed_to_load_image).into(serviceImage);
+        String placeholderURL = "https://www.industrialempathy.com/img/blurry.svg";
+
+
+        Glide.with(view.getContext())
+                .asBitmap()
+                .load(physioAction.getImageURL())
+                .placeholder(R.drawable.blur_img)
+                .error(R.drawable.ic_failed_to_load_image)
+                .into(serviceImage);
 
         backButton = view.findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
