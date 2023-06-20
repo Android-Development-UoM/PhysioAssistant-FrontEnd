@@ -50,7 +50,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
 
         Appointment currentAppointment = appointments.get(position);
-        holder.message.setText(currentAppointment.getPatient().getName()+" έστειλε αίτημα για ραντεβού στις "+currentAppointment.getFormattedDate()+" "+currentAppointment.getTime());
+        holder.message.setText(currentAppointment.getPatient().getName()+" έστειλε αίτημα για ραντεβού στις "
+                +currentAppointment.getFormattedDate()+" "+currentAppointment.getTime()+" για "+currentAppointment.getPhysioAction().getName());
 
         holder.acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -152,6 +152,25 @@ public class DataManager {
         });
     }
 
+    public void loadDoctorsByPatientId(String patientId){
+        patientApi.getAllDoctorsByPatientId(patientId).enqueue(new Callback<List<Doctor>>() {
+            @Override
+            public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
+                if (response.isSuccessful()) {
+                    List<Doctor> doctors = response.body();
+                    EventBus.getDefault().post(new DoctorsLoadedEvent(doctors));
+                } else {
+                    printErrorMessage(response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Doctor>> call, Throwable t) {
+                Log.e("Error", "failed to load doctors"+t);
+            }
+        });
+    }
+
     public void createDoctor(Doctor doctor){
         doctorApi.createDoctor(doctor).enqueue(new Callback<Doctor>() {
             @Override

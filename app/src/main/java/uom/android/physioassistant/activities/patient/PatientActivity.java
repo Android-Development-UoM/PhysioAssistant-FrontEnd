@@ -84,7 +84,7 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
             patient.setAppointments(appointments);
             isAppointmentsLoaded = true;
             DataManager dataManager = new DataManager();
-            dataManager.loadDoctors();
+            dataManager.loadDoctorsByPatientId(patient.getAmka());
             checkIfAllDataLoaded();
         }
     }
@@ -94,6 +94,7 @@ public class PatientActivity extends AppCompatActivity implements FragmentNaviga
         if(!isDoctorsLoaded){
             doctors = (ArrayList<Doctor>) event.getDoctors();
             isDoctorsLoaded = true;
+            System.out.println(patient.getDoctors());
             DataManager dataManager = new DataManager();
             dataManager.loadPhysioActions();
             checkIfAllDataLoaded();
