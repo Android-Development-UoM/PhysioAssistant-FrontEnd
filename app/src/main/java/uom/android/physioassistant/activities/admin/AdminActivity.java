@@ -1,6 +1,10 @@
 package uom.android.physioassistant.activities.admin;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.login.LoginActivity;
 import uom.android.physioassistant.ui.common.ClearEditTexts;
 import uom.android.physioassistant.ui.fragments.FragmentNavigation;
 import uom.android.physioassistant.backend.datamanager.DataManager;
@@ -33,7 +38,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
     private ArrayList<PhysioAction> physioActions;
     private boolean isDoctorsLoaded,isPhysioActionsLoaded;
     private Stack<Fragment> backStack = new Stack<>();
-    private MaterialButton doctorButton,physioActionButton;
+    private MaterialButton doctorButton,physioActionButton, logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
     private void initViews(){
         doctorButton = findViewById(R.id.physioButton);
         physioActionButton = findViewById(R.id.serviceButton);
+        logoutButton = findViewById(R.id.logoutBtnAdmin);
 
         doctorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +79,32 @@ public class AdminActivity extends AppCompatActivity implements FragmentNavigati
             }
         });
 
+        logoutButton.setOnClickListener(v -> {
+            Log.i("Admin Home", "Logout button clicked");
+
+            // Display a dialog box to confirm logout
+            AlertDialog.Builder builder = new AlertDialog.Builder(AdminActivity.this);
+            builder.setTitle("Αποσύνδεση");
+            builder.setMessage("Ειστε σίγουροι οτι θέλετε να αποσυνδεθείτε;");
+            builder.setPositiveButton("ΝΑΙ", (dialog, which) -> {
+                // Logout
+                Log.i("Admin Home", "Logging out");
+
+                // Start the logout activity and finish the current activity
+                Intent intent = new Intent(AdminActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+                finish();
+            });
+
+            builder.setNegativeButton("ΟΧΙ", (dialog, which) -> {
+                // Close dialog
+                dialog.cancel();
+            });
+
+            builder.show();
+        });
     }
 
     @Override

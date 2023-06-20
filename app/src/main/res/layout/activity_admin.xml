@@ -48,16 +48,33 @@
                 android:id="@+id/serviceButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
                 android:text="Υπηρεσία"
                 android:textAllCaps="false"
                 android:textColor="@color/blue"
                 android:textSize="@dimen/text_size_small"
                 app:cornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintEnd_toStartOf="@+id/logoutBtnAdmin"
                 app:layout_constraintStart_toEndOf="@+id/physioButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutBtnAdmin"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorError"
+                android:paddingLeft="12dp"
+                android:paddingRight="10dp"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/text_size_small"
+                app:cornerRadius="20dp"
+                app:icon="@drawable/ic_logout_btn"
+                app:iconPadding="0dp"
+                app:iconSize="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

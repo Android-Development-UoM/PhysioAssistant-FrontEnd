@@ -40,7 +40,9 @@ public enum FragmentType {
     APPOINTMENT_DOCTOR_SUMMARY(new AppointmentSummaryDoctorFragment()),
 
     CREATE_DOCTOR_FRAGMENT(new CreateDoctorFragment()),
-    CREATE_SERVICE_FRAGMENT(new CreateServiceFragment());
+    CREATE_SERVICE_FRAGMENT(new CreateServiceFragment()),
+
+    NO_FRAGMENT(null);
 
 
 

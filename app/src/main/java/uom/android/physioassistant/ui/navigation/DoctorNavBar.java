@@ -1,13 +1,18 @@
 package uom.android.physioassistant.ui.navigation;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
 import uom.android.physioassistant.R;
+import uom.android.physioassistant.activities.login.LoginActivity;
 import uom.android.physioassistant.ui.common.ButtonType;
 
 public class DoctorNavBar extends NavBar{
@@ -46,9 +51,9 @@ public class DoctorNavBar extends NavBar{
         notificationsButton.setButtonType(ButtonType.DOCTOR_NOTIFICATIONS);
 
         TextView homeText = findViewById(R.id.homeNavText);
-        TextView patientText = findViewById(R.id.patientNavText);
+        TextView patientText = findViewById(R.id.patientsNavText);
         TextView calendarText = findViewById(R.id.calendarNavText);
-        TextView notificationText = findViewById(R.id.notificationNavText);
+        TextView notificationText = findViewById(R.id.notificationsNavText);
 
         NavItem homeItem = findViewById(R.id.homeLayout);
         NavItem patientItem = findViewById(R.id.patientsLayout);
@@ -72,6 +77,41 @@ public class DoctorNavBar extends NavBar{
         backStack = new Stack<>();
 
         currentButton = homeItem;
+
+        NavButton logoutButton = findViewById(R.id.logoutButton);
+        logoutButton.setButtonType(null);
+        logoutButton.setButtonType(ButtonType.LOGOUT);
+        logoutButton.setOnClickListener(v -> {
+            Log.i("DoctorNavBar", "Logout button clicked");
+
+            // Set this button as pressed
+            logoutButton.setPressed();
+
+            // Display a dialog box to confirm logout
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Αποσύνδεση");
+            builder.setMessage("Ειστε σίγουροι οτι θέλετε να αποσυνδεθείτε;");
+            builder.setPositiveButton("ΝΑΙ", (dialog, which) -> {
+                // Logout
+                Log.i("DoctorNavBar", "Logging out");
+
+                // Start the logout activity and finish the current activity
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+
+                ((Activity) getContext()).finish();
+            });
+
+            builder.setNegativeButton("ΟΧΙ", (dialog, which) -> {
+                // Close dialog
+                dialog.cancel();
+                logoutButton.setIdle();
+
+            });
+
+            builder.show();
+        });
 
         buttons = new ArrayList<>();
         buttons.add(homeItem);

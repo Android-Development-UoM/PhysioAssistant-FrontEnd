@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
     <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/homeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="49dp"
         app:layout_constraintEnd_toStartOf="@+id/calendarLayout"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -34,13 +36,13 @@
 
     </uom.android.physioassistant.ui.navigation.NavItem>
 
-
     <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/calendarLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginStart="90dp"
+        app:layout_constraintEnd_toStartOf="@+id/logoutLayout"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/homeLayout"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -65,7 +67,33 @@
 
     </uom.android.physioassistant.ui.navigation.NavItem>
 
+    <uom.android.physioassistant.ui.navigation.NavItem
+        android:id="@+id/logoutLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <uom.android.physioassistant.ui.navigation.NavButton
+            android:id="@+id/logoutButton"
+            android:layout_width="@dimen/nav_button_size"
+            android:layout_height="@dimen/nav_button_size"
+            android:src="@drawable/ic_logout_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/logoutNavText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Αποσύνδεση"
+            android:textSize="@dimen/text_size_nav"
+            app:layout_constraintEnd_toEndOf="@id/logoutButton"
+            app:layout_constraintStart_toStartOf="@id/logoutButton"
+            app:layout_constraintTop_toBottomOf="@id/logoutButton" />
+
+    </uom.android.physioassistant.ui.navigation.NavItem>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

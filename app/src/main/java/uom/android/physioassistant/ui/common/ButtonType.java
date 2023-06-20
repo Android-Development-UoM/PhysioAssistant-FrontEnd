@@ -11,7 +11,8 @@ public enum ButtonType {
     DOCTOR_HOME(R.drawable.ic_home,R.drawable.ic_home_pressed,FragmentType.DOCTOR_HOME_FRAGMENT),
     DOCTOR_CALENDAR(R.drawable.ic_calendar,R.drawable.ic_calendar_pressed,FragmentType.DOCTOR_CALENDAR_FRAGMENT),
     DOCTOR_PATIENTS(R.drawable.ic_profile,R.drawable.ic_profile_pressed,FragmentType.DOCTOR_PATIENTS_FRAGMENT),
-    DOCTOR_NOTIFICATIONS(R.drawable.ic_notification,R.drawable.ic_notification_pressed,FragmentType.DOCTOR_NOTIFICATIONS_FRAGMENT);
+    DOCTOR_NOTIFICATIONS(R.drawable.ic_notification,R.drawable.ic_notification_pressed,FragmentType.DOCTOR_NOTIFICATIONS_FRAGMENT),
+    LOGOUT(R.drawable.ic_logout_btn, R.drawable.ic_logout_btn_pressed, FragmentType.NO_FRAGMENT);
 
 
 
