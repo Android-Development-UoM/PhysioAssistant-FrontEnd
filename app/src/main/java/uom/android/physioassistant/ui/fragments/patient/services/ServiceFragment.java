@@ -106,7 +106,7 @@ public class ServiceFragment extends Fragment implements OnBackPressedListener {
         Glide.with(view.getContext())
                 .asBitmap()
                 .load(physioAction.getImageURL())
-                .placeholder(R.drawable.blur_img)
+                .placeholder(R.drawable.img_placeholder)
                 .error(R.drawable.ic_failed_to_load_image)
                 .into(serviceImage);
 

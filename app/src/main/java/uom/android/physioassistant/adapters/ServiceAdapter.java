@@ -1,5 +1,6 @@
 package uom.android.physioassistant.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,10 +47,18 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         String imageURL = "https://img.freepik.com/premium-photo/spa-arrangement-with-towel-soap-salt_23-2148268482.jpg?w=2000";
-        Glide.with(patientHomeFragment.getContext()).asBitmap().load(physioActions.get(position).getImageURL()).error(R.drawable.ic_failed_to_load_image).into(holder.serviceImage);
+
+        Glide.with(patientHomeFragment.getContext())
+                .asBitmap()
+                .load(physioActions.get(position).getImageURL())
+                .placeholder(R.drawable.blur_img)
+                .error(R.drawable.ic_failed_to_load_image)
+                .into(holder.serviceImage);
+
+
         holder.serviceName.setText(physioActions.get(position).getName());
         holder.serviceImage.setOnClickListener(new View.OnClickListener() {
             @Override
