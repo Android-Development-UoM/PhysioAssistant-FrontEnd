@@ -9,7 +9,7 @@ public class BackendAPI {
     private Retrofit retrofit;
 
     // API IP address | CHANGE THIS TO YOUR IP ADDRESS
-    private static String API_IP = "192.168.2.30";
+    private static String API_IP = "192.168.1.73";
 
     // API Port | CHANGE THIS TO YOUR PORT
     private static String API_PORT = "8080";

@@ -8,10 +8,11 @@
 
     <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/homeLayout"
-        android:layout_width="54dp"
-        android:layout_height="49dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         app:layout_constraintEnd_toStartOf="@+id/calendarLayout"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -38,10 +39,10 @@
 
     <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/calendarLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
         app:layout_constraintEnd_toStartOf="@+id/logoutLayout"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/homeLayout"
         app:layout_constraintTop_toTopOf="parent">
@@ -69,10 +70,10 @@
 
     <uom.android.physioassistant.ui.navigation.NavItem
         android:id="@+id/logoutLayout"
-        android:layout_width="0dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendarLayout"
         app:layout_constraintTop_toTopOf="parent">
 
         <uom.android.physioassistant.ui.navigation.NavButton
